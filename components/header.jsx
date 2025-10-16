@@ -1,19 +1,22 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SignedIn, SignInButton, SignedOut, SignOutButton, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignInButton, SignedOut, UserButton } from '@clerk/nextjs'
 import { ArrowLeft, CarFront, Heart, Layout } from "lucide-react";
 import { Button } from "./ui/button";
 
-const Header =async ({ isAdminPage = false }) => {
+const Header =({ isAdminPage = false }) => {
 const isAdmin = false
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
+      {/* Navbar buttons*/}
       <nav className="mx-auto px-4 py-4 flex items-center justify-between">
         <Link href={isAdminPage? "/admin" : "/"} className="flex">
           <Image 
-            src={'/logo.png'} alt="RK Motor" width={200} height={60} className="h-10 w-auto object-contain" priority
+            src={'/RKmotor.png'} alt="RK Motor" width={200} height={80} className="h-10 w-auto object-contain" priority
           />
 
           {isAdminPage && (
@@ -55,7 +58,7 @@ const isAdmin = false
             </SignInButton>
           </SignedOut>
 
-          {/* Circle for create user login logo */}
+           {/* User Avatar */}
           <SignedIn>
             <UserButton 
               appearance={{
