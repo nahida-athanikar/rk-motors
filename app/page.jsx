@@ -136,17 +136,18 @@ export default function Home() {
           {bodyTypes.map((type) => {
             return <Link key={type.name} 
           href={`/cars?bodyTypes=${type.name}`}
-          className="relative group cursor-pointer">
-            <div className="overflow-hidden rounded-lg flex justify-end h-28 mb-4 relative">
+          className="group bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition duration-300">
+            <div className="h-16 w-16 mb-4 flex items-center justify-center">
               <Image 
                 src={type.image} 
                 alt={type.name} 
-                fill
-                className="object-cover group-hover:scale-105 transition duration-300"
+                width={100}
+                height={74}
+                className="group-hover:scale-110 transition-transform duration-300 group-hover:text-blue-600"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
-               
+            <div className="font-semibold text-lg text-gray-800 group-hover:text-blue-600">
+               {type.name}
             </div>
 
           </Link>
