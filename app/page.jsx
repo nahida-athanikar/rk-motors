@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import HomeSearch from "@/components/home-search";
 import { Calendar, Car, ChevronRight, Shield } from "lucide-react";
-import { bodyTypes, carMakes, featuredCars } from "@/lib/data";
+import { bodyTypes, carMakes, faqItems, featuredCars } from "@/lib/data";
 import CarCard from "@/components/car-card";
 import Link from "next/link";
 import Image from "next/image";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
   return (
@@ -136,13 +138,13 @@ export default function Home() {
           {bodyTypes.map((type) => {
             return <Link key={type.name} 
           href={`/cars?bodyTypes=${type.name}`}
-          className="group bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition duration-300">
-            <div className="h-16 w-16 mb-4 flex items-center justify-center">
+          className="group shadow-md p-6 flex flex-col items-center justify-center hover:shadow-lg transition duration-300">
+            <div className="h-10 w-20 mb-4 flex items-center justify-center">
               <Image 
                 src={type.image} 
                 alt={type.name} 
-                width={100}
-                height={74}
+                width={64}
+                height={60}
                 className="group-hover:scale-110 transition-transform duration-300 group-hover:text-blue-600"
               />
             </div>
@@ -154,6 +156,42 @@ export default function Home() {
           })}         
         </div>
       </div>
+      </section>
+
+
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((faq, index) => {
+              return <AccordionItem key={index} value={`item-${index}`}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+
+            })}
+            
+          </Accordion>
+        </div>
+      </section>
+
+
+      <section className="py-16 dotted-background text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Find Your Dream Car?</h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Join thousands of satisfied customers who found their perfect vehicle through our platform.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button size="lg" variant="secondary" asChild>
+              <Link href="/cars">View All Cars</Link>
+            </Button>
+            <SignedOut size="lg" asChild>
+              <Link href="/sign-up">Sign Up Now</Link>
+            </SignedOut>
+          </div>
+        </div>
       </section>
     </div>
   )
