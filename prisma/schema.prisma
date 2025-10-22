@@ -73,10 +73,10 @@ enum CarStatus {
 
 model DealershipInfo {
   id           String        @id @default(uuid())
-  name         String        @default("Vehiql Motors")
-  address      String        @default("69 Car Street, Autoville, CA 69420") 
-  phone        String        @default("+1 (555) 123-4567")
-  email        String        @default("contact@vehiql.com")
+  name         String        @default("RK Motors")
+  address      String        @default("1334 J.J.Complex, Shop No.1, Panjarpol Ind. Estate, Main Road, Kolhapur") 
+  phone        String        @default("+918421000786")
+  email        String        @default("yasinathanikar06@gmail.com")
   workingHours WorkingHour[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
