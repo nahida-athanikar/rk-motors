@@ -51,7 +51,7 @@ const CarCard = ({ car }) => {
        <CardContent className="p-4">
         <div className="flex flex-col mb-2">
           <h3 className="text-lg font-bold line-clamp-1">{car.make} {car.model}</h3>
-          <span className="text-xl font-bold text-blue-600"> ${car.price.toLocaleString()}</span>
+          <span className="text-xl font-bold text-blue-600"> ₹{car.price.toLocaleString()}</span>
         </div>
 
         <div className="text-gray-600 mb-2 flex items-center">

@@ -365,11 +365,11 @@ export const AddCarForm = () => {
 
                   {/* Price */}
                   <div className="space-y-2">
-                    <Label htmlFor="price">Price ($)</Label>
+                    <Label htmlFor="price">Price (₹)</Label>
                     <Input
                       id="price"
                       {...register("price")}
-                      placeholder="e.g. 25000"
+                      placeholder="e.g. 1500000"
                       className={errors.price ? "border-red-500" : ""}
                     />
                     {errors.price && (
