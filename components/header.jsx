@@ -1,18 +1,18 @@
-"use client";
+
 
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SignedIn, SignInButton, SignedOut, UserButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignInButton, SignedOut, UserButton } from "@clerk/nextjs";
 import { ArrowLeft, CarFront, Heart, Layout } from "lucide-react";
 import { Button } from "./ui/button";
+import { checkUser } from "@/lib/checkUser";
 
-const Header = ({ isAdminPage = false }) => {
-  const { user, isLoaded } = useUser();
+const Header =async ({ isAdminPage = false }) => {
+  const user = await checkUser();
 
-  if (!isLoaded) return null;
+  const isAdmin = user?.role === "ADMIN";
 
-  const isAdmin = user?.publicMetadata?.role === "ADMIN";
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
@@ -31,7 +31,7 @@ const Header = ({ isAdminPage = false }) => {
 
         <div className="flex items-center space-x-4">
           {isAdminPage ? (
-            <Link href="/saved-cars">
+            <Link href="/">
               <Button variant="outline" className="flex items-center">
                 <ArrowLeft size={18} /> <span>Back to App</span>
               </Button>

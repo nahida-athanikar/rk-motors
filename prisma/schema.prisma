@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
+  provider = "prisma-client"
+  output   = "../lib/generated"
 }
 
 datasource db {
@@ -15,22 +15,23 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  id            String             @id @default(uuid())
+  clerkUserId   String             @unique //clerk user id
+  email         String             @unique
+  name          String?
+  imageUrl      String?
+  phone         String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  role          UserRole           @default(USER)
+  savedCars     UserSavedCar[]
+  testDrives    TestDriveBooking[]
 
-model User{
-  id             String       @id @default(uuid())
-  clerkUserId    String       @unique //clerk userid
-  email          String       @unique
-  name           String?
-  imageUrl       String?
-  phone          String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  role           UserRole     @default(USER)
-  savedCars      UserSavedCar[]  
-  testDrives     TestDriveBooking[]
+  @@map("users")
 }
 
-enum UserRole{
+enum UserRole {
   USER
   ADMIN
 }
@@ -71,10 +72,11 @@ enum CarStatus {
   SOLD
 }
 
+// Single dealership configuration, if you have multiple dealerships, you can remove default values.
 model DealershipInfo {
   id           String        @id @default(uuid())
   name         String        @default("RK Motors")
-  address      String        @default("1334 J.J.Complex, Shop No.1, Panjarpol Ind. Estate, Main Road, Kolhapur") 
+  address      String        @default("1334, J.J.Complex, Shop No.1, Panjarpol Ind. Estate, Main Road, Kolhapur") 
   phone        String        @default("+918421000786")
   email        String        @default("yasinathanikar06@gmail.com")
   workingHours WorkingHour[]
@@ -82,7 +84,7 @@ model DealershipInfo {
   updatedAt    DateTime      @updatedAt
 }
 
-
+// Working hours configuration
 model WorkingHour {
   id             String       @id @default(uuid())
   dealershipId   String
@@ -123,7 +125,6 @@ model UserSavedCar {
   @@index([carId])
 }
 
-
 model TestDriveBooking {
   id            String        @id @default(uuid())
   carId         String
@@ -143,7 +144,6 @@ model TestDriveBooking {
   @@index([bookingDate])
   @@index([status])
 }
-
 
 enum BookingStatus {
   PENDING
