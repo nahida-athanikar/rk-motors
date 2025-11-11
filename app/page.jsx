@@ -69,6 +69,7 @@ export default function Home() {
                 src={make.image} 
                 alt={make.name} 
                 fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 16vw"
                 style={{ objectFit: "contain" }}
               />
             </div>

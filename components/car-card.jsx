@@ -27,6 +27,7 @@ const CarCard = ({ car }) => {
           <div className="relative w-full h-full">
             <Image src={car.images[0]} alt={`${car.make} ${car.model}`} 
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover group-hover:scale-105 transition duration-300"
             />
           </div>
@@ -51,7 +52,7 @@ const CarCard = ({ car }) => {
        <CardContent className="p-4">
         <div className="flex flex-col mb-2">
           <h3 className="text-lg font-bold line-clamp-1">{car.make} {car.model}</h3>
-          <span className="text-xl font-bold text-blue-600"> ₹{car.price.toLocaleString()}</span>
+          <span className="text-xl font-bold text-blue-600"> ₹{car.price.toLocaleString("en-IN")}</span>
         </div>
 
         <div className="text-gray-600 mb-2 flex items-center">
@@ -65,7 +66,7 @@ const CarCard = ({ car }) => {
         <div className="flex flex-wrap gap-1 mb-4">
           <Badge variant="outline" className="bg-gray-50">{car.bodyType}</Badge>
           
-          <Badge variant="outline" className="bg-gray-50">{car.mileage.toLocaleString()}</Badge>
+          <Badge variant="outline" className="bg-gray-50">{car.mileage.toLocaleString("en-IN")}</Badge>
 
           <Badge variant="outline" className="bg-gray-50">{car.color}</Badge>
         </div>
