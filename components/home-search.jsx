@@ -189,8 +189,12 @@ const HomeSearch = () => {
               <Button 
                 type="submit"
                 className="w-full mt-2"
-                disabled={isUploading}>
-                  {isUploading ? "Uploading..." : "Search with this Image"}
+                disabled={isUploading || isProcessing}>
+                  {isUploading 
+                    ? "Uploading..." 
+                    : isProcessing 
+                    ? "Analyzing Image..."
+                    : "Search with this Image"}
                 </Button>
             )}
           </form>
@@ -200,4 +204,4 @@ const HomeSearch = () => {
   )
 }
 
-export default HomeSearch
+export default HomeSearch;

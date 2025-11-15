@@ -1,22 +1,62 @@
 "use client";
 
-import { CarrotIcon, Heart } from 'lucide-react';
+import { CarrotIcon, Heart, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
+import useFetch from '@/hooks/use-fetch';
+import { toggleSavedCar } from '@/actions/car-listing';
+import { useAuth } from '@clerk/nextjs';
+import { toast } from 'sonner';
 
 
 const CarCard = ({ car }) => {
-
+  const { isSignedIn } = useAuth();
   const [isSaved, setIsSaved] = useState(car.wishlisted)
   const router = useRouter();
 
+// Use the useFetch hook
+  const {
+    loading: isToggling,
+    fn: toggleSavedCarFn,
+    data: toggleResult,
+    error: toggleError,
+  } = useFetch(toggleSavedCar);
+
+
+  // Handle toggle result with useEffect
+  useEffect(() => {
+    if (toggleResult?.success && toggleResult.saved !== isSaved) {
+      setIsSaved(toggleResult.saved);
+      toast.success(toggleResult.message);
+    }
+  }, [toggleResult, isSaved]);
+
+  // Handle errors with useEffect
+  useEffect(() => {
+    if (toggleError) {
+      toast.error("Failed to update favorites");
+    }
+  }, [toggleError]);
+
 
   const handleToggleSave = async(e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
+    if (!isSignedIn) {
+      toast.error("Please sign in to save cars");
+      router.push("/sign-in");
+      return;
+    }
+
+    if (isToggling) return;
+
+    // Call the toggleSavedCar function using our useFetch hook
+    await toggleSavedCarFn(car.id);
   }
 
 
@@ -44,7 +84,11 @@ const CarCard = ({ car }) => {
         }`}
           onClick={handleToggleSave}
         >
-          <Heart className={isSaved ? "fill-current" : ""} size={20}/>
+          {isToggling ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Heart className={isSaved ? "fill-current" : ""} size={20} />
+          )}
         </Button>
       </div>
 
@@ -63,12 +107,12 @@ const CarCard = ({ car }) => {
           <span>{car.fuelType}</span>
         </div>
 
-        <div className="flex flex-wrap gap-1 mb-4">
-          <Badge variant="outline" className="bg-gray-50">{car.bodyType}</Badge>
+        <div className="flex flex-wrap gap-2 mb-5">
+          <Badge variant="outline" className="bg-gray-100 text-gray-700 px-2 py-1 text-xs">{car.bodyType}</Badge>
           
-          <Badge variant="outline" className="bg-gray-50">{car.mileage.toLocaleString("en-IN")}</Badge>
+          <Badge variant="outline" className="bg-gray-100 text-gray-700 px-2 py-1 text-xs">{car.mileage.toLocaleString("en-IN")} km</Badge>
 
-          <Badge variant="outline" className="bg-gray-50">{car.color}</Badge>
+          <Badge variant="outline" className="bg-gray-100 text-gray-700 px-2 py-1 text-xs">{car.color}</Badge>
         </div>
 
         <div className="flex justify-between">

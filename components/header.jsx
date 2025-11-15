@@ -8,9 +8,8 @@ import { ArrowLeft, CarFront, Heart, Layout } from "lucide-react";
 import { Button } from "./ui/button";
 import { checkUser } from "@/lib/checkUser";
 
-const Header =async ({ isAdminPage = false }) => {
+const Header = async ({ isAdminPage = false }) => {
   const user = await checkUser();
-
   const isAdmin = user?.role === "ADMIN";
 
 
@@ -22,7 +21,7 @@ const Header =async ({ isAdminPage = false }) => {
             src={"/RKmotor.png"}
             alt="RK Motor"
             width={200}
-            height={80}
+            height={60}
             className="h-10 w-auto object-contain"
             priority
           />
@@ -41,7 +40,7 @@ const Header =async ({ isAdminPage = false }) => {
               {/* Saved cars */}
               <Link href="/saved-cars">
                 <Button>
-                  <CarFront size={18} /> <span className="hidden md:inline">Saved Cars</span>
+                  <Heart size={18} /> <span className="hidden md:inline">Saved Cars</span>
                 </Button>
               </Link>
 
