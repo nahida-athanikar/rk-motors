@@ -210,41 +210,34 @@ export async function getDashboardData() {
       }),
     ]);
 
-    // Calculate car statistics
-    const totalCars = await db.car.count();
-    const availableCars = await db.car.count({
-      where: { status: "AVAILABLE" },
-    });
-       
-    const soldCars = await db.car.count({
-      where: { status: "SOLD" },
-    });
-
-    const unavailableCars = await db.car.count({
-      where: { status: "UNAVAILABLE" },
-    });
-    const featuredCars = await db.car.count({
-      where: { status: { featured: true } }
-    });
+     // Calculate car statistics
+    const totalCars = cars.length;
+    const availableCars = cars.filter(
+      (car) => car.status === "AVAILABLE"
+    ).length;
+    const soldCars = cars.filter((car) => car.status === "SOLD").length;
+    const unavailableCars = cars.filter(
+      (car) => car.status === "UNAVAILABLE"
+    ).length;
+    const featuredCars = cars.filter((car) => car.featured === true).length;
 
     // Calculate test drive statistics
-    const totalTestDrives = await db.testDriveBooking.count();
-    const pendingTestDrives =  await db.testDriveBooking.count({
-      where: { status: "PENDING" },
-    });
-
-    const confirmedTestDrives = await db.testDriveBooking.count({
-      where: { status: "CONFIRMED" },
-    });
-    const completedTestDrives = await db.testDriveBooking.count({
-      where: { status: "COMPLETED" },
-    });
-    const cancelledTestDrives = await db.testDriveBooking.count({
-      where: { status: "CANCELLED" },
-    });
-    const noShowTestDrives = await db.testDriveBooking.count({
-      where: { status: "NOT_SHOW" },
-    });
+    const totalTestDrives = testDrives.length;
+    const pendingTestDrives = testDrives.filter(
+      (td) => td.status === "PENDING"
+    ).length;
+    const confirmedTestDrives = testDrives.filter(
+      (td) => td.status === "CONFIRMED"
+    ).length;
+    const completedTestDrives = testDrives.filter(
+      (td) => td.status === "COMPLETED"
+    ).length;
+    const cancelledTestDrives = testDrives.filter(
+      (td) => td.status === "CANCELLED"
+    ).length;
+    const noShowTestDrives = testDrives.filter(
+      (td) => td.status === "NO_SHOW"
+    ).length;
 
     // Calculate test drive conversion rate
     const completedTestDriveCarIds = testDrives
