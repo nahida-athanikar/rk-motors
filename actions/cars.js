@@ -13,6 +13,7 @@ import { serializeCarData } from "@/lib/helper";
 
 // Function to convert File to base64
 async function fileToBase64(file) {
+  if (!file) throw new Error("No file provided");
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
   return buffer.toString("base64");
@@ -26,11 +27,14 @@ export async function processCarImageWithAI(file) {
       throw new Error("Gemini API key is not configured");
     }
 
+    if (!file) {
+      throw new Error("No file provided for AI processing");
+    }
+
     // Initialize Gemini API
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
    
-
     // Convert image file to base64
     const base64Image = await fileToBase64(file);
 
@@ -115,8 +119,8 @@ export async function processCarImageWithAI(file) {
         success: true,
         data: carDetails,
       };
-    } catch (error) {
-      console.error("Failed to parse AI response:", error);
+    } catch (parseError) {
+      console.error("Failed to parse AI response:", parseError);
       console.log("Raw response:", text);
       return {
         success: false,
@@ -124,8 +128,8 @@ export async function processCarImageWithAI(file) {
       };
     }
   } catch (error) {
-    console.error();
-    throw new Error("Gemini API error:" + error.message);
+    console.error("Gemini API error:", error);
+    throw new Error("Gemini API error:" + error?.message || String(error));
   }
 }
 
@@ -147,8 +151,14 @@ export async function addCar({ carData, images }) {
     const folderPath = `cars/${carId}`;
 
     // Initialize Supabase client for server-side operations
-    const cookieStore = await cookies()
+    const cookieStore = cookies()
     const supabase = createClient(cookieStore)
+
+    
+    // Validate images input (expecting data URLs array)
+    if (!Array.isArray(images) || images.length === 0) {
+      throw new Error("No images provided");
+    }
 
     // Upload all images to Supabase storage
     const imageUrls = [];
@@ -157,8 +167,8 @@ export async function addCar({ carData, images }) {
       const base64Data = images[i];
 
       // Skip if image data is not valid
-      if (!base64Data || !base64Data.startsWith("data:image/")) {
-        console.warn("Skipping invalid image data");
+      if (!base64Data || typeof base64Data !== "string" || !base64Data.startsWith("data:image/")) {
+        console.warn("Skipping invalid image data at index", i);
         continue;
       }
 
@@ -166,6 +176,11 @@ export async function addCar({ carData, images }) {
       const base64 = base64Data.split(",")[1];
       const imageBuffer = Buffer.from(base64, "base64");
 
+      // 🚨 Prevent server crash due to oversized uploads (max 10MB)
+      if (imageBuffer.length > 10 * 1024 * 1024) {
+        throw new Error("Image too large. Max size is 10MB.");
+      }
+      
       // Determine file extension from the data URL
       const mimeMatch = base64Data.match(/data:image\/([a-zA-Z0-9]+);/);
       const fileExtension = mimeMatch ? mimeMatch[1] : "jpeg";
@@ -224,7 +239,7 @@ export async function addCar({ carData, images }) {
       success: true,
     };
   } catch (error) {
-    throw new Error("Error adding car:" + error.message);
+    throw new Error("Error adding car:" + error?.message || String(error));
   }
 }
 
@@ -294,7 +309,7 @@ export async function deleteCar(id) {
       const supabase = createClient(cookieStore);
 
       // Extract file paths from image URLs
-      const filePaths = car.images
+      const filePaths = (car.images || [])
         .map((imageUrl) => {
           const url = new URL(imageUrl);
           const pathMatch = url.pathname.match(/\/car-images\/(.*)/);
@@ -341,13 +356,14 @@ export async function updateCarStatus(id, { status, featured }) {
 
     const updateData = {};
 
-    if (status !== undefined) {
+    if (typeof status === "string") {
       updateData.status = status;
     }
 
-    if (featured !== undefined) {
+    if (typeof featured === "boolean") {
       updateData.featured = featured;
     }
+
 
     // Update the car
     await db.car.update({

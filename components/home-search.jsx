@@ -31,8 +31,8 @@ const HomeSearch = () => {
       const file = acceptedFiles[0];
 
       if(file) {
-        if(file.size > 5 * 1024 * 1024) {
-          toast.error("Image size must be less than 5MB");
+        if(file.size > 10 * 1024 * 1024) {
+          toast.error("Image size must be less than 10MB");
           return;
         }
 
@@ -178,7 +178,7 @@ const HomeSearch = () => {
                     <p className="text-red-500 mb-2">Invalid image type</p>
                   )}
                   <p className="text-gray-400 text-sm">
-                    Supports: JPG, PNG(max 5MB)
+                    Supports: JPG, PNG(max 10MB)
                   </p>
                 </div>
               </div>

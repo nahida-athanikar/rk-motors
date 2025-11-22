@@ -61,7 +61,7 @@ const CarCard = ({ car }) => {
 
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition group py-0">
+    <Card className="overflow-hidden  hover:shadow-lg transition group py-0 bg-white">
       <div className="relative w-full h-48">
         {car.images && car.images.length > 0 ? (
           <div className="relative w-full h-full">
@@ -94,16 +94,16 @@ const CarCard = ({ car }) => {
 
 {/* Cars Information */}
        <CardContent className="p-4">
-        <div className="flex flex-col mb-2">
-          <h3 className="text-lg font-bold line-clamp-1">{car.make} {car.model}</h3>
+        <div className="flex flex-col gap-1 mb-2">
+          <h3 className="text-[1.15rem] font-bold line-clamp-1">{car.make} {car.model}</h3>
           <span className="text-xl font-bold text-blue-600"> ₹{car.price.toLocaleString("en-IN")}</span>
         </div>
 
-        <div className="text-gray-600 mb-2 flex items-center">
+        <div className="text-gray-600 flex items-center text-sm gap-1 mb-2">
           <span>{car.year}</span>
-          <span className="mx-2">.</span>
+          <span className="mx-1">.</span>
           <span>{car.transmission}</span>
-          <span className="mx-2">.</span>
+          <span className="mx-1">.</span>
           <span>{car.fuelType}</span>
         </div>
 

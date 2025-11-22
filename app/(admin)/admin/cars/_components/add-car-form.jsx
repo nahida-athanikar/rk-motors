@@ -183,8 +183,8 @@ export const AddCarForm = () => {
     const file = acceptedFiles[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("Image size should be less than 5MB");
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("Image size should be less than 10MB");
       return;
     }
 
@@ -210,8 +210,8 @@ export const AddCarForm = () => {
   // Handle multiple image uploads with Dropzone
   const onMultiImagesDrop = useCallback((acceptedFiles) => {
     const validFiles = acceptedFiles.filter((file) => {
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error(`${file.name} exceeds 5MB limit and will be skipped`);
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error(`${file.name} exceeds 10MB limit and will be skipped`);
         return false;
       }
       return true;
