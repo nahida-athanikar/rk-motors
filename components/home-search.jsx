@@ -116,45 +116,58 @@ const HomeSearch = () => {
 
 
 
-  return (
-    <div>
-      <form onSubmit={handleTextSubmit}>
-        <div className="relative flex items-center">
-          <Input 
-            type="text"
-            placeholder="Enter make, model, pr use our AI Image Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-12 py-6 w-full rounded-full border-gray-300 bg-white/95 backdrop-blur-sm"
-          />
+ return (
+  <div className="mt-4 px-2 sm:px-4">
+    {/* 🔍 Text Search Form */}
+    <form onSubmit={handleTextSubmit}>
+      <div className="relative flex items-center bg-white rounded-full shadow-lg border border-gray-200 py-2 px-4">
+        
+        <Camera
+          size={30}
+          onClick={() => setIsImageSearchActive(!isImageSearchActive)}
+          className={`p-0.5 cursor-pointer rounded-full transition ${
+            isImageSearchActive
+              ? "bg-[#00A7FF] text-white animate-pulse"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+        />
 
-          <div className="absolute right-[100px]">
-            <Camera 
-              size={35}
-              onClick={() => setIsImageSearchActive(!isImageSearchActive)}
-              className="cursor-pointer rounded-xl p-1.5"
-              style={{
-                background: isImageSearchActive ? "black" : "",
-                color: isImageSearchActive ? "white" : "",
-              }}
-            
-            />
-          </div>
-          <Button type="submit" className="absolute right-2 rounded-full">Search</Button>
-        </div>
-      </form>
+        <Input
+          type="text"
+          placeholder="Search by Make, Model or try Image AI Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border-none focus-visible:ring-0 shadow-none text-sm placeholder-gray-400 flex-1"
+        />
 
-      {isImageSearchActive && (
-        <div className="mt-5">
-          <form onSubmit={handleImageSearch}>
-            <div className="border-2 border-dashed border-gray-300 rounded-3xl p-6 text-center">
-              {imagePreview ? (
-              <div className="flex flex-col items-center">
-                <img src={imagePreview} 
-                alt="Car preview" 
-                className="h-40 object-contain mb-4"/>
+        <Button
+          type="submit"
+          className="rounded-full px-5 py-5 text-sm font-semibold bg-black hover:bg-gray-800"
+        >
+          Search
+        </Button>
+      </div>
+    </form>
 
-                <Button variant="outline" 
+    {/* 🖼️ Image Upload Section */}
+    {isImageSearchActive && (
+      <div className="mt-5 animate-slideDown">
+        <form onSubmit={handleImageSearch}>
+          <div className="p-6 text-center border-2 border-dashed border-grey-300 rounded-3xl 
+bg-transparent backdrop-blur-md shadow-[0_0_25px_rgba(255,0,0,0.15)] transition-all">
+
+            {imagePreview ? (
+              <div className="flex flex-col items-center gap-3">
+                <img
+                  src={imagePreview}
+                  alt="Car preview"
+                  className="h-40 object-contain rounded-xl shadow-xl"
+                />
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="rounded-full text-black border-white"
                   onClick={() => {
                     setSearchImage(null);
                     setImagePreview("");
@@ -165,43 +178,43 @@ const HomeSearch = () => {
                 </Button>
               </div>
             ) : (
-              <div {...getRootProps()} className="cursor-pointer">
+              <div
+                {...getRootProps()}
+                className="cursor-pointer flex flex-col items-center"
+              >
                 <input {...getInputProps()} />
-                <div className="flex flex-col items-center">
-                  <Upload className="h-12 w-12 text-gray-400 mb-2" />
-                  <p className="text-gray-500 mb-2">
-                    {isDragActive && !isDragReject 
-                    ? "Leave the file here to upload" 
-                    : "Drag & drop a car image or click to select"}
-                  </p>
-                  {isDragReject && (
-                    <p className="text-red-500 mb-2">Invalid image type</p>
-                  )}
-                  <p className="text-gray-400 text-sm">
-                    Supports: JPG, PNG(max 10MB)
-                  </p>
-                </div>
+                <Upload className="h-10 w-10 text-gray-300 mb-3" />
+                <p className="text-gray-400 font-medium">
+                  Drop car image or browse
+                </p>
+                <span className="text-xs text-gray-400 mt-1">
+                  JPG / PNG (max 10MB)
+                </span>
               </div>
             )}
-            </div>
+          </div>
 
-            {imagePreview && (
-              <Button 
-                type="submit"
-                className="w-full mt-2"
-                disabled={isUploading || isProcessing}>
-                  {isUploading 
-                    ? "Uploading..." 
-                    : isProcessing 
-                    ? "Analyzing Image..."
-                    : "Search with this Image"}
-                </Button>
-            )}
-          </form>
-        </div>
-      )}
-    </div>
-  )
+          {imagePreview && (
+            <Button
+  type="submit"
+  className="w-full mt-3 rounded-full py-4 font-semibold 
+  bg-gradient-to-r from-red-600 via-red-500 to-red-700 
+  text-white shadow-[0_0_20px_rgba(255,0,0,0.35)] hover:opacity-90 transition"
+
+              disabled={isUploading || isProcessing}
+            >
+              {isUploading
+                ? "Uploading..."
+                : isProcessing
+                ? "Analyzing..."
+                : "Search with Image"}
+            </Button>
+          )}
+        </form>
+      </div>
+    )}
+  </div>
+);
 }
 
 export default HomeSearch;

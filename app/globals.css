@@ -122,19 +122,32 @@
 }
 
 .dotted-background {
-  background-color: #16223c;
+  /* Black base */
   background-image: radial-gradient(
-    rgba(255, 255, 255, 0.28) 1px,
+    rgba(255, 215, 0, 0.25) 1.5px,
     transparent 1px
   );
-  background-size: 30px 30px;
+  background-size: 28px 28px;
 }
 
 @layer utilities {
   .gradient-title {
     @apply bg-gradient-to-br from-blue-500 to-green-500 font-extrabold tracking-tighter pr-2 pb-2 text-transparent bg-clip-text;
   }
+
 }
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
 
 /* Hide caret and text selection only for buttons and non-editable elements */
 button, 
@@ -161,3 +174,100 @@ input, textarea, select {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0,0,0,0.4);
 }
+
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-slideDown {
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+.animate-marquee2 {
+  animation: marquee 18s linear infinite;
+  animation-delay: -9s;
+}
+
+/* Hide scrollbar (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar (Firefox) */
+.scrollable-row {
+  scrollbar-width: none;
+}
+
+/* hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* brand track animation */
+.brand-track {
+  display: flex;
+  width: max-content; /* important so translation aligns to content width */
+  animation: scrollBrands 28s linear infinite;
+  will-change: transform;
+}
+
+/* pause animation on hover (and when user interacts) */
+.brand-track:hover,
+.brand-track:active {
+  animation-play-state: paused;
+}
+
+/* keyframes: move left by exactly 50% of the track (because items are duplicated) */
+@keyframes scrollBrands {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* brand-card visual polish (no color shifts) */
+.brand-card {
+  transition: transform 0.35s cubic-bezier(0.22,0.61,0.36,1), box-shadow 0.35s ease;
+  perspective: 1000px;
+}
+.brand-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.12); }
+
+/* optional: make sure container hides overflow cleanly */
+.relative.overflow-hidden { position: relative; }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease forwards;
+}
+
+@keyframes fadeZoom {
+  0% { opacity: 0; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeZoom {
+  animation: fadeZoom 1.5s ease-out forwards;
+}
+
+
+
+
+
+
+

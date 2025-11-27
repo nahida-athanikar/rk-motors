@@ -3,7 +3,10 @@ import React from 'react'
 
 const SignInPage = () => {
   return (
-    <SignIn />
+      <SignIn 
+      className="-mt-40"
+    />
+    
   )
 }
 

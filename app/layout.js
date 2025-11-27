@@ -5,6 +5,7 @@ import Header from "@/components/header";
 const inter = Inter({subsets:["latin"]})
 import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from "sonner";
+import { Facebook, Image, Instagram } from "lucide-react";
 
 
 export const metadata = {
@@ -22,13 +23,27 @@ export default function RootLayout({ children }) {
           <main className="min-h-screen"> {children} </main>
           <Toaster richColors />
           
-          <footer className="bg-blue-50 py-12">
-            <div className="container mx-auto px-4 text-center text-gray-600">
-              <p>
-                @copyright Rk Motors
+          <footer className="bg-grey-50 py-2">
+            <div className="container mx-auto px- flex flex-col items-center gap-2 text-center mb-4">
+
+              {/* Logo */}
+              <div className="w-30 h-auto m-5">
+                <img src="./RKmotor.webp" alt="RK Motors" />
+              </div>   
+
+              
+              {/* Text */}
+              <p className="-mt-5 text-black text-sm font-semibold">
+                Premium Pre-Owned Cars. Verified. Trusted. AI Assisted.
+              </p>
+
+              {/* Copyright */}
+              <p className="text-gray-600 text-xs">
+                © 2025 RK Motors — All Rights Reserved.
               </p>
             </div>
           </footer>
+
         </body>
       </html>
     </ClerkProvider>
