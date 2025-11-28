@@ -1,14 +1,12 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
+import { IndianRupee, Percent, CalendarDays, Gauge } from "lucide-react";
 
 function EmiCalculator({ price = 1000 }) {
-  // safe parse helper
   const safeParse = (v, fallback = 0) => {
     const n = parseFloat(v);
     return isNaN(n) ? fallback : n;
   };
-
 
   const [loanAmount, setLoanAmount] = useState(price);
   const [downPayment, setDownPayment] = useState(0);
@@ -16,73 +14,30 @@ function EmiCalculator({ price = 1000 }) {
   const [interestRate, setInterestRate] = useState(5);
   const [loanTenure, setLoanTenure] = useState(1);
   const [results, setResults] = useState(null);
-  const [error, setError] = useState("");
-
-  const handleLoanAmountChange = (value) => {
-    const parsed = safeParse(value, 1000);
-    const newLoanAmount = Math.min(Math.max(parsed, 1000), 150000);
-    setLoanAmount(newLoanAmount);
-    const newDownPayment = (downPaymentPercent / 100) * newLoanAmount;
-    setDownPayment(newDownPayment);
-    calculateLoan(newLoanAmount, newDownPayment, interestRate, loanTenure);
-  };
-
-  const handleDownPaymentChange = (value) => {
-    const parsed = safeParse(value, 0);
-    const max = loanAmount || 0;
-    const newDownPayment = Math.min(Math.max(parsed, 0), max);
-    setDownPayment(newDownPayment);
-    setDownPaymentPercent(max > 0 ? (newDownPayment / max) * 100 : 0);
-    calculateLoan(loanAmount, newDownPayment, interestRate, loanTenure);
-  };
-
-  const handleDownPaymentPercentChange = (percent) => {
-    const parsed = safeParse(percent, 0);
-    const newPercent = Math.min(Math.max(percent, 0), 100);
-    setDownPaymentPercent(newPercent);
-
-    const newDownPayment = (newPercent / 100) * (loanAmount || 0);
-    setDownPayment(newDownPayment);
-    calculateLoan(loanAmount, newDownPayment, interestRate, loanTenure);
-  };
-
-  const handleInterestRateChange = (value) => {
-    const parsed = safeParse(value, 5);
-    const newRate = Math.min(Math.max(parsed, 0.1), 25);
-    setInterestRate(newRate);
-    calculateLoan(loanAmount, downPayment, newRate, loanTenure);
-  };
-
-  const handleLoanTenureChange = (value) => {
-    const parsed = safeParse(value, 1);
-    const newTenure = Math.min(Math.max(parsed, 1), 8);
-    setLoanTenure(newTenure);
-    calculateLoan(loanAmount, downPayment, interestRate, newTenure);
-  };
 
   const calculateLoan = (principal, down, rate, years) => {
-    const loanPrincipal = (principal || 0) - (down || 0);
+    const loanPrincipal = principal - down;
     if (loanPrincipal <= 0) {
       setResults(null);
       return;
     }
 
-    const monthlyRate = (rate || 0) / 100 / 12;
-    const months = (years || 0) * 12;
+    const monthlyRate = rate / 100 / 12;
+    const months = years * 12;
 
     const emi =
       (loanPrincipal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
       (Math.pow(1 + monthlyRate, months) - 1);
-      
+
     const totalPayment = emi * months;
     const totalInterest = totalPayment - loanPrincipal;
 
     setResults({
-      emi: emi.toFixed(2),
-      totalInterest: totalInterest.toFixed(2),
-      totalPayment: totalPayment.toFixed(2),
-      loanPrincipal: loanPrincipal.toFixed(2),
-      downPayment: (down || 0).toFixed(2),
+      emi,
+      totalInterest,
+      totalPayment,
+      loanPrincipal,
+      downPayment: down,
     });
   };
 
@@ -90,229 +45,172 @@ function EmiCalculator({ price = 1000 }) {
     calculateLoan(loanAmount, downPayment, interestRate, loanTenure);
   }, []);
 
-  const formatNumber = (num) => {
-  return new Intl.NumberFormat("en-IN", {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  }).format(Number(num));
-};
-
+  const formatINR = (num) =>
+    new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(num);
 
   return (
-    <div className="w-full max-h-[80vh] overflow-y-auto pr-1">
-      <div className="w-full">
-        <div className="flex items-center mb-6">
-          <i className="fas fa-car text-gray-900 dark:text-white text-2xl mr-3"></i>
+    <div className="max-h-[80vh] overflow-y-auto space-y-6 p-1">
+
+      {/* Title */}
+      <h2 className="text-2xl font-bold text-gray-900 text-center">
+        EMI Calculator
+      </h2>
+      <p className="text-sm text-gray-600 text-center">
+        Adjust values below to estimate your monthly car loan EMI.
+      </p>
+
+      {/* Vehicle Price */}
+      <div className="bg-gray-50 p-5 rounded-2xl space-y-4 border">
+        <label className="font-semibold text-gray-800 flex items-center gap-2">
+          <IndianRupee size={18} /> Vehicle Price
+        </label>
+        <input
+          type="number"
+          value={loanAmount}
+          onChange={(e) => {
+            const value = safeParse(e.target.value, 1000);
+            const clean = Math.min(Math.max(value, 1000), 20000000);
+            setLoanAmount(clean);
+            calculateLoan(clean, downPayment, interestRate, loanTenure);
+          }}
+          className="w-full px-4 py-2 rounded-lg border"
+        />
+        <input
+          type="range"
+          min="1000"
+          max="20000000"
+          value={loanAmount}
+          onChange={(e) => {
+            const value = safeParse(e.target.value, 1000);
+            setLoanAmount(value);
+            calculateLoan(value, downPayment, interestRate, loanTenure);
+          }}
+          className="w-full"
+        />
+      </div>
+
+      {/* Down Payment */}
+      <div className="bg-gray-50 p-5 rounded-2xl space-y-4 border">
+        <label className="font-semibold text-gray-800 flex items-center gap-2">
+          <Gauge size={18} /> Down Payment
+        </label>
+        <input
+          type="number"
+          value={downPayment}
+          onChange={(e) => {
+            const value = safeParse(e.target.value, 0);
+            const clean = Math.min(Math.max(value, 0), loanAmount);
+            setDownPayment(clean);
+            setDownPaymentPercent((clean / loanAmount) * 100);
+            calculateLoan(loanAmount, clean, interestRate, loanTenure);
+          }}
+          className="w-full px-4 py-2 rounded-lg border"
+        />
+        <input
+          type="range"
+          min="0"
+          max={loanAmount}
+          value={downPayment}
+          onChange={(e) => {
+            const value = safeParse(e.target.value);
+            setDownPayment(value);
+            setDownPaymentPercent((value / loanAmount) * 100);
+            calculateLoan(loanAmount, value, interestRate, loanTenure);
+          }}
+          className="w-full"
+        />
+        <p className="text-sm text-gray-600">{downPaymentPercent.toFixed(1)}% of vehicle price</p>
+      </div>
+
+      {/* Row: Interest + Tenure */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <div className="bg-gray-50 p-5 rounded-2xl border space-y-4">
+          <label className="font-semibold text-gray-800 flex items-center gap-2">
+            <Percent size={18} /> Interest %
+          </label>
+          <input
+            type="number"
+            value={interestRate}
+            onChange={(e) => {
+              const value = safeParse(e.target.value, 5);
+              const clean = Math.min(Math.max(value, 1), 25);
+              setInterestRate(clean);
+              calculateLoan(loanAmount, downPayment, clean, loanTenure);
+            }}
+            className="w-full px-4 py-2 rounded-lg border"
+          />
+          <input
+            type="range"
+            min="1"
+            max="25"
+            value={interestRate}
+            onChange={(e) => {
+              const value = safeParse(e.target.value);
+              setInterestRate(value);
+              calculateLoan(loanAmount, downPayment, value, loanTenure);
+            }}
+            className="w-full"
+          />
         </div>
 
-        <div className="space-y-4">
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-            <h2 className="text-lg font-inter font-semibold text-gray-900 dark:text-white mb-3">
-              Vehicle Price
-            </h2>
-            <div className="space-y-3">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-700 dark:text-gray-300">₹</span>
-                </div>
-                <input
-                  type="number"
-                  value={loanAmount || ""}
-                  onChange={(e) => handleLoanAmountChange(e.target.value)
-                  }
-                  className="w-full pl-8 pr-4 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-gray-900 dark:focus:border-gray-400"
-                />
-              </div>
-              <input
-                type="range"
-                min="1000"
-                max="150000"
-                value={loanAmount}
-                onChange={(e) =>
-                  handleLoanAmountChange(e.target.value)
-                }
-                className="w-full"
-              />
-            </div>
-          </div>
-
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-            <h2 className="text-lg font-inter font-semibold text-gray-900 dark:text-white mb-3">
-              Down Payment
-            </h2>
-            <div className="space-y-3">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-700 dark:text-gray-300">₹</span>
-                </div>
-                <input
-                  type="number"
-                  value={downPayment || ""}
-                  onChange={(e) =>
-                    handleDownPaymentChange(e.target.value)
-                  }
-                  className="w-full pl-8 pr-4 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-gray-900 dark:focus:border-gray-400"
-                />
-              </div>
-              <input
-                type="range"
-                min="0"
-                max={loanAmount}
-                value={downPayment}
-                onChange={(e) =>
-                  handleDownPaymentChange(e.target.value)
-                }
-                className="w-full"
-              />
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                Down payment: {downPaymentPercent.toFixed(1)}% of vehicle price
-              </div>
-            </div>
-          </div>
-           {/* Interest Rate + Loan Tenure */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-              <h2 className="text-lg font-inter font-semibold text-gray-900 dark:text-white mb-3">
-                Interest Rate
-              </h2>
-              <div className="space-y-3">
-                <div className="relative">
-                  <input
-                    type="number"
-                    value={interestRate || ""}
-                    onChange={(e) =>
-                      handleInterestRateChange(e.target.value)
-                    }
-                    className="w-full pr-8 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-gray-900 dark:focus:border-gray-400"
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span className="text-gray-700 dark:text-gray-300">%</span>
-                  </div>
-                </div>
-                <input
-                  type="range"
-                  min="0.1"
-                  max="25"
-                  step="0.1"
-                  value={interestRate}
-                  onChange={(e) =>
-                    handleInterestRateChange(e.target.value)
-                  }
-                  className="w-full"
-                />
-              </div>
-            </div>
-
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-              <h2 className="text-lg font-inter font-semibold text-gray-900 dark:text-white mb-3">
-                Loan Term
-              </h2>
-              <div className="space-y-3">
-                <div className="relative">
-                  <input
-                    type="number"
-                    value={loanTenure || ""}
-                    onChange={(e) =>
-                      handleLoanTenureChange(e.target.value)
-                    }
-                    className="w-full pr-12 py-2 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-gray-900 dark:focus:border-gray-400"
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      Years
-                    </span>
-                  </div>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="8"
-                  value={loanTenure}
-                  onChange={(e) =>
-                    handleLoanTenureChange(e.target.value)
-                  }
-                  className="w-full"
-                />
-              </div>
-            </div>
-          </div>
-
-          {error && (
-            <div className="text-red-500 dark:text-red-400 text-sm mt-3">
-              {error}
-            </div>
-          )}
-
-          {results && (
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mt-4">
-              <div className="text-center mb-4">
-                <div className="text-sm font-inter text-gray-700 dark:text-gray-300">
-                  Monthly Payment
-                </div>
-                <div className="text-3xl font-bold text-gray-900 dark:text-white mt-1">
-                  ₹{formatNumber(results.emi)}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white dark:bg-gray-900 p-3 rounded-lg">
-                  <div className="text-sm font-inter text-gray-700 dark:text-gray-300">
-                    Vehicle Price
-                  </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white mt-1">
-                    ₹{formatNumber(loanAmount)}
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-900 p-3 rounded-lg">
-                  <div className="text-sm font-inter text-gray-700 dark:text-gray-300">
-                    Down Payment
-                  </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white mt-1">
-                    ₹{formatNumber(results.downPayment)}
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-900 p-3 rounded-lg">
-                  <div className="text-sm font-inter text-gray-700 dark:text-gray-300">
-                    Loan Amount
-                  </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white mt-1">
-                    ₹{formatNumber(results.loanPrincipal)}
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-900 p-3 rounded-lg">
-                  <div className="text-sm font-inter text-gray-700 dark:text-gray-300">
-                    Total Interest
-                  </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white mt-1">
-                    ₹{formatNumber(results.totalInterest)}
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-900 p-3 rounded-lg md:col-span-2">
-                  <div className="text-sm font-inter text-gray-700 dark:text-gray-300">
-                    Total Amount (Down Payment + Total Payments)
-                  </div>
-                  <div className="text-lg font-bold text-gray-900 dark:text-white mt-1">
-                    ₹
-                    {formatNumber(
-                      parseFloat(results.downPayment) +
-                        parseFloat(results.totalPayment)
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <p className="text-sm text-gray-700 dark:text-gray-300 text-center font-inter">
-            This is an estimate. Actual EMI may vary based on your credit score
-            and lender terms.
-          </p>
+        <div className="bg-gray-50 p-5 rounded-2xl border space-y-4">
+          <label className="font-semibold text-gray-800 flex items-center gap-2">
+            <CalendarDays size={18} /> Loan Tenure (Years)
+          </label>
+          <input
+            type="number"
+            value={loanTenure}
+            onChange={(e) => {
+              const value = safeParse(e.target.value, 1);
+              const clean = Math.min(Math.max(value, 1), 10);
+              setLoanTenure(clean);
+              calculateLoan(loanAmount, downPayment, interestRate, clean);
+            }}
+            className="w-full px-4 py-2 rounded-lg border"
+          />
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={loanTenure}
+            onChange={(e) => {
+              const value = safeParse(e.target.value);
+              setLoanTenure(value);
+              calculateLoan(loanAmount, downPayment, interestRate, value);
+            }}
+            className="w-full"
+          />
         </div>
       </div>
+
+      {/* Results */}
+      {results && (
+        <div className="bg-blue-50 border border-blue-300 p-6 rounded-2xl space-y-5">
+          <h3 className="text-center text-lg font-semibold">Estimated EMI</h3>
+          <p className="text-center text-3xl font-bold text-blue-700">
+            ₹{formatINR(results.emi)}
+          </p>
+
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-gray-600">Loan Amount</p>
+              <p className="font-semibold">₹{formatINR(results.loanPrincipal)}</p>
+            </div>
+            <div>
+              <p className="text-gray-600">Total Interest</p>
+              <p className="font-semibold">₹{formatINR(results.totalInterest)}</p>
+            </div>
+            <div className="col-span-2 text-center border-t pt-2 font-semibold">
+              Total Payment: ₹{formatINR(results.totalPayment + downPayment)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <p className="text-xs text-gray-500 text-center">
+        *Actual EMI may vary based on bank & credit score.
+      </p>
     </div>
   );
 }

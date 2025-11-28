@@ -5,11 +5,20 @@ import CarDetails from './_components/car-details';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const result = await getCarById(id);
-
-  if(!result.success) {
+  
+  let result;
+  try {
+    result = await getCarById(id);
+  } catch {
     return {
-      title: "car Not Found | RK Motors",
+      title: "Car Not Found | RK Motors",
+      description: "Unable to fetch car details. Please check your internet connection."
+    };
+  }
+
+  if(!result?.success || !result?.data) {
+    return {
+      title: "Car Not Found | RK Motors",
       description: "The requested car could not be found",
     };
   }
@@ -27,13 +36,20 @@ export async function generateMetadata({ params }) {
 
 const CarPage = async( { params } ) => {
   const { id } = await params;
-  const result = await getCarById(id);
-
-  if(!result.success) {
-    notFound();
+  let result;
+  try {
+    result = await getCarById(id);
+  } catch {
+    return (
+      <div className="container mx-auto px-4 py-12 text-red-500 text-center">
+        Failed to load car details. Please check your network connection and try again.
+      </div>
+    );
   }
 
-
+  if(!result?.success || !result?.data) {
+    notFound();
+  }
 
   return (
     <div className="container mx-auto px-4 py-12">

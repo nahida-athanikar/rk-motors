@@ -1,0 +1,57 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
+export default function WhatsappFloating({ car }) {
+  const pathname = usePathname();
+
+  // Check if user is inside a specific car detail page (e.g. /cars/abc123)
+  const isCarDetailPage = pathname.startsWith("/cars/");
+
+  let message;
+
+  if (isCarDetailPage && car) {
+    // Auto message with car details
+    message = `
+Hello, I am interested in the ${car.make} ${car.model} (${car.year}) listed on RK Motors.
+
+Could you please share:
+• Final Negotiable Price?
+• Vehicle Condition?
+• Insurance Validity?
+• Service History & Any Accidents?
+• Test Drive Availability?
+
+Looking forward to your reply.`;
+  } else {
+    // Default message for homepage or anywhere else
+    message = "Hello, I would like to inquire about a car listed on RK Motors. Please assist me.";
+  }
+
+  
+  return (
+    <>
+      <style jsx>{`
+        @keyframes bounceShrink {
+          0% { transform: translateY(0) scale(1); }
+          30% { transform: translateY(-6px) scale(0.92); }
+          60% { transform: translateY(4px) scale(1.05); }
+          100% { transform: translateY(0) scale(1); }
+        }
+      `}</style>
+
+      <a
+        href={`https://wa.me/919112292021?text=${encodeURIComponent(message)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 z-50"
+      >
+        <img
+          src="/whatsapp.webp"
+          alt="WhatsApp"
+          className="w-18 h-18 hover:scale-110 drop-shadow-lg transition-all duration-300 animate-[bounceShrink_1.8s_ease-in-out_infinite]"
+        />
+      </a>
+    </>
+  );
+}

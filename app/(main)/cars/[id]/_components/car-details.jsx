@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 import EmiCalculator from './emi-calculator';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { format } from 'date-fns';
+import WhatsappFloating from '../../_components/whatsappFloating';
 
 
 
@@ -155,222 +156,260 @@ const CarDetails = ({ car, testDriveInfo }) => {
 
 
    return (
-    <div>
+    <div >
       <div className="flex flex-col lg:flex-row gap-8 -mt-19">
         {/* Image Gallery */}
-        <div className="w-full lg:w-7/12">
-          <div className="aspect-video rounded-lg overflow-hidden relative mb-4">
-            {car.images && car.images.length > 0 ? (
-              <Image
-                src={car.images[currentImageIndex]}
-                alt={`${car.year} ${car.make} ${car.model}`}
-                fill
-                className="object-cover"
-                priority
-              />
-            ) : (
-              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                <Car className="h-24 w-24 text-gray-400" />
-              </div>
-            )}
-          </div>
+        <div className="w-full lg:w-7/12 space-y-5">
 
-          {/* Thumbnails */}
-          {car.images && car.images.length > 1 && (
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {car.images.map((image, index) => (
-                <div
-                  key={index}
-                  className={`relative cursor-pointer rounded-md h-20 w-24 flex-shrink-0 transition ${
-                    index === currentImageIndex
-                      ? "border-2 border-blue-600"
-                      : "opacity-70 hover:opacity-100"
-                  }`}
-                  onClick={() => setCurrentImageIndex(index)}
-                >
-                  <Image
-                    src={image}
-                    alt={`${car.year} ${car.make} ${car.model} - view ${
-                      index + 1
-                    }`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+        {/* Main Image Box */}
+        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-white">
+          {car.images && car.images.length > 0 ? (
+            <Image
+              src={car.images[currentImageIndex]}
+              alt={`${car.year} ${car.make} ${car.model}`}
+              fill
+              className="object-cover transition-transform duration-300 hover:scale-105"
+              priority
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+              <Car className="h-24 w-24 text-gray-400" />
             </div>
           )}
 
-          {/* Secondary Actions */}
-          <div className="flex mt-4 gap-4">
-            <Button
-              variant="outline"
-              className={`flex items-center gap-2 flex-1 ${
-                isWishlisted ? "text-red-500" : ""
-              }`}
-              onClick={handleSaveCar}
-              disabled={savingCar}
-            >
-              <Heart
-                className={`h-5 w-5 ${isWishlisted ? "fill-red-500" : ""}`}
-              />
-              {isWishlisted ? "Saved" : "Save"}
-            </Button>
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 flex-1"
-              onClick={handleShare}
-            >
-              <Share2 className="h-5 w-5" />
-              Share
-            </Button>
-          </div>
+          {/* Photo Counter Tag */}
+          {car.images?.length > 1 && (
+            <span className="absolute bottom-3 right-3 text-sm bg-black/60 text-white px-3 py-1 rounded-full">
+              {currentImageIndex + 1}/{car.images.length}
+            </span>
+          )}
         </div>
 
+        {/* Thumbnails Slider */}
+        {car.images && car.images.length > 1 && (
+          <div className="flex gap-4 p-2 overflow-x-auto scrollbar-hide">
+            {car.images.map((image, index) => (
+              <div
+                key={index}
+                className={`relative cursor-pointer h-20 w-28 rounded-md overflow-hidden border transition-all duration-200 flex-shrink-0 shadow-sm 
+                  ${index === currentImageIndex ? "ring-2 ring-blue-600 scale-105" : "opacity-70 hover:opacity-100 hover:scale-105"}
+                `}
+                onClick={() => setCurrentImageIndex(index)}
+              >
+                <Image
+                  src={image}
+                  alt={`${car.year} ${car.make} ${car.model} - Image ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="grid grid-cols-2 gap-4">
+          <Button
+            variant="outline"
+            className={`flex items-center justify-center gap-2 py-4 rounded-lg shadow-sm transition-all hover:shadow-md 
+            ${isWishlisted ? "text-red-500 border-red-400" : ""}`}
+            onClick={handleSaveCar}
+            disabled={savingCar}
+          >
+            <Heart className={`h-5 w-5 ${isWishlisted ? "fill-red-500" : ""}`} />
+            {isWishlisted ? "Saved" : "Save"}
+          </Button>
+
+          <Button
+            variant="outline"
+            className="flex items-center justify-center gap-2 py-4 rounded-lg shadow-sm hover:shadow-md transition-all"
+            onClick={handleShare}
+          >
+            <Share2 className="h-5 w-5" />
+            Share
+          </Button>
+        </div>
+        </div>
+
+
         {/* Car Details */}
-        <div className="w-full lg:w-5/12">
-          <div className="flex items-center justify-between">
-            <Badge className="mb-2">{car.bodyType}</Badge>
+      <div className="w-full lg:w-5/12 space-y-3 px-1">
+
+          {/* Body Badge */}
+          <div className="flex justify-between items-center">
+            <Badge className="px-3 py-1 text-xs sm:text-sm rounded-full bg-gradient-to-r from-red-600 via-red-500 to-red-700 
+          text-white shadow-[0_0_20px_rgba(255,0,0,0.35)] font-semibold">
+              {car.bodyType}
+            </Badge>
           </div>
 
-          <h1 className="text-4xl font-bold mb-1">
-            {car.year} {car.make} {car.model}
+          {/* Title */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">
+            {car.make} {car.model} {car.year}
           </h1>
 
-          <div className="text-2xl font-bold text-blue-600">
+          {/* Price */}
+          <div className="text-2xl sm:text-3xl font-bold text-blue-700">
             {formatCurrency(car.price)}
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
-            <div className="flex items-center gap-2">
-              <Gauge className="text-gray-500 h-5 w-5" />
+          <div className="grid grid-cols-3 sm:grid-cols-3 gap-4 p-2 rounded-xl border border-gray-200">
+            <div className="flex flex-col items-center text-xs sm:text-sm gap-1">
+              <Gauge className="text-blue-600 h-5 w-5" />
               <span>{car.mileage.toLocaleString("en-IN")} km</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Fuel className="text-gray-500 h-5 w-5" />
+
+            <div className="flex flex-col items-center text-xs sm:text-sm gap-1">
+              <Fuel className="text-blue-600 h-5 w-5" />
               <span>{car.fuelType}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Car className="text-gray-500 h-5 w-5" />
+
+            <div className="flex flex-col items-center text-xs sm:text-sm gap-1">
+              <Car className="text-blue-600 h-5 w-5" />
               <span>{car.transmission}</span>
             </div>
           </div>
 
+          {/* EMI Calculator */}
           <Dialog>
             <DialogTrigger className="w-full text-start">
-              <Card className="pt-5">
-                <CardContent>
-                  <div className="flex items-center gap-2 text-lg font-medium mb-2">
-                    <Currency className="h-5 w-5 text-blue-600" />
+              <Card className="border border-grey-200 hover:shadow-md transition cursor-pointer active:scale-[0.98]">
+                <CardContent className="sm:p-2">
+                  <div className="flex items-center gap-2 sm:gap-3 text-base sm:text-lg font-semibold mb-1">
+                    <Currency className="h-5 w-5 text-blue-700" />
                     <h3>EMI Calculator</h3>
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Estimated Monthly Payment:{" "}
-                    <span className="font-bold text-gray-900">
-                      {formatCurrency(car.price / 60)}
-                    </span>{" "}
-                    for 60 months
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    *Based on ₹0 down payment and 4.5% interest rate
-                  </div>
+
+                  <p className="text-xs sm:text-sm text-gray-600">
+                    Estimated Monthly Payment:
+                    <span className="font-bold text-gray-900 ml-1">
+                    {formatCurrency(car.price / 60)}
+                    </span>
+                  </p>
+
+                  <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
+                    *Based on ₹0 down payment & 4.5% interest rate
+                  </p>
                 </CardContent>
               </Card>
             </DialogTrigger>
-            <DialogContent>
+
+            <DialogContent className="max-w-md w-[90%] sm:w-auto mt-15">
               <DialogHeader>
-                <DialogTitle>RK Motors Car Loan Calculator</DialogTitle>
-                <EmiCalculator price={car.price} />
+                <DialogTitle className="text-center text-lg font-bold">RK Motors Loan Calculator</DialogTitle>
               </DialogHeader>
+              <EmiCalculator price={car.price} />
             </DialogContent>
           </Dialog>
 
-          {/* Request More Info */}
-          <Card className="my-6">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-lg font-medium mb-2">
-                <MessageSquare className="h-5 w-5 text-blue-600" />
-                <h3>Have Questions?</h3>
+         {/* Request Info */}
+          <Card className="border border-gray-200 shadow-md rounded-2xl bg-white">
+            <CardContent className="p-5 sm:p-6">
+              
+              {/* Title + Icon */}
+              <div className="flex items-center gap-3 mb-3">
+                <MessageSquare className="h-6 w-6 text-blue-600" />
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+                  Have Questions?
+                </h3>
               </div>
-              <p className="text-sm text-gray-600 mb-3">
-                Our representatives are available to answer all your queries
-                about this vehicle.
+
+              {/* Subtext */}
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-5">
+                Our team is ready to assist you with accurate details, price breakdown, and availability.
               </p>
-              <a href="mailto:yasinathanikar06@gmail.com">
-                <Button variant="outline" className="w-full">
-                  Request Info
+            
+              {/* Buttons */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3">
+                  {/* CTA Button */}
+                <Button
+                  className="w-full py-3 text-sm sm:text-base font-medium rounded-lg"
+                  onClick={() => {
+                    window.open(
+                      `https://mail.google.com/mail/?view=cm&fs=1&to=yasinathanikar06@gmail.com&su=Inquiry About Car&body=Hello, I am interested in this car.`,
+                      "_blank"
+                    );
+                  }}> 📩 Request Info
+                </Button>
+                
+                {/* Call */}
+              <a href={`tel:+91${car.ownerPhone || "9373020904"}`}>
+                <Button className="w-full py-3 text-sm sm:text-base font-medium bg-green-600 hover:bg-green-500 text-white rounded-lg">
+                  📞 Call Now
                 </Button>
               </a>
-            </CardContent>
+              </div>
+
+          </CardContent>
           </Card>
 
-          {(car.status === "SOLD" || car.status === "UNAVAILABLE") && (
-            <Alert variant="destructive">
-              <AlertTitle className="capitalize">
-                This car is {car.status.toLowerCase()}
-              </AlertTitle>
-              <AlertDescription>Please check again later.</AlertDescription>
-            </Alert>
-          )}
 
-          {/* Book Test Drive Button */}
-          {car.status !== "SOLD" && car.status !== "UNAVAILABLE" && (
-            <Button
-              className="w-full py-6 text-lg"
-              onClick={handleBookTestDrive}
-              disabled={testDriveInfo.userTestDrive}
-            >
-              <Calendar className="mr-2 h-5 w-5" />
-              {testDriveInfo.userTestDrive
-                ? `Booked for ${format(
-                    new Date(testDriveInfo.userTestDrive.bookingDate),
-                    "EEEE, MMMM d, yyyy"
-                  )}`
-                : "Book Test Drive"}
-            </Button>
-          )}
+  {/* Status */}
+  {(car.status === "SOLD" || car.status === "UNAVAILABLE") && (
+    <Alert variant="destructive" className="py-3 text-sm sm:text-base">
+      <AlertTitle className="capitalize font-bold text-sm">
+        This car is {car.status.toLowerCase()}
+      </AlertTitle>
+      <AlertDescription className="text-xs">
+        Please check again later.
+      </AlertDescription>
+    </Alert>
+  )}
+
+  {/* Book Test Drive */}
+  {car.status !== "SOLD" && car.status !== "UNAVAILABLE" && (
+    <Button
+      className="w-full py-4 sm:py-5 text-sm sm:text-lg font-semibold rounded-xl shadow-md hover:scale-[1.01] transition-transform"
+      onClick={handleBookTestDrive}
+      disabled={testDriveInfo.userTestDrive}
+    >
+      <Calendar className="mr-2 h-5 w-5" />
+      {testDriveInfo.userTestDrive
+        ? `Booked for ${format(new Date(testDriveInfo.userTestDrive.bookingDate), "EEE, MMM d")}`
+        : "Book Test Drive"}
+    </Button>
+  )}
         </div>
       </div>
 
       {/* Details & Features Section */}
-      <div className="mt-12 p-6 bg-white rounded-lg shadow-sm">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-6">Description</h3>
-            <p className="whitespace-pre-line text-gray-700">
-              {car.description}
-            </p>
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold mb-6">Features</h3>
-            <ul className="grid grid-cols-1 gap-2">
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 bg-blue-600 rounded-full"></span>
-                {car.transmission} Transmission
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 bg-blue-600 rounded-full"></span>
-                {car.fuelType} Engine
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 bg-blue-600 rounded-full"></span>
-                {car.bodyType} Body Style
-              </li>
-              {car.seats && (
-                <li className="flex items-center gap-2">
-                  <span className="h-2 w-2 bg-blue-600 rounded-full"></span>
-                  {car.seats} Seats
-                </li>
-              )}
-              <li className="flex items-center gap-2">
-                <span className="h-2 w-2 bg-blue-600 rounded-full"></span>
-                {car.color} Exterior
-              </li>
-            </ul>
-          </div>
-        </div>
+<div className="mt-5 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    
+    {/* Description */}
+    <div>
+      <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text mb-4">
+        Description
+      </h3>
+      <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+        {car.description}
+      </p>
+    </div>
+    
+    {/* Features */}
+    <div>
+      <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text mb-4">
+        Features
+      </h3>
+      <div className="flex flex-wrap gap-3">
+        <span className="px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-full shadow-sm">
+          {car.transmission} Transmission
+        </span>
+        <span className="px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-full shadow-sm">
+          {car.fuelType} Engine
+        </span>
+        <span className="px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-full shadow-sm">
+          {car.bodyType} Body Style
+        </span>
+        
+        
       </div>
+    </div>
+
+  </div>
+</div>
+
 
       {/* car Overview */}
       <Card className="mt-8 rounded-2xl shadow-sm border bg-white">
@@ -465,8 +504,11 @@ const CarDetails = ({ car, testDriveInfo }) => {
           </div>
         </div>
       </div>
-
+      
     </div>
+
+
+
   );
 }
 

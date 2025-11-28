@@ -69,7 +69,11 @@ export async function getCarFilters() {
     };
 
   } catch (error) {
-     throw new Error("Error fetching car filters:" + error.message);
+    // Return structured error object instead of throwing
+    return {
+      success: false,
+      error: `Error fetching car filters: ${error?.message || String(error)}`,
+    };
   }
 }
 
@@ -187,8 +191,12 @@ export async function getCars({
 
 
     } catch (error) {
-       throw new Error("Error fetching cars:" + error.message);
-    }
+    // Return structured error instead of throwing
+    return {
+      success: false,
+      error: `Error fetching cars: ${error?.message || String(error)}`,
+    };
+  }
 }
 
 
@@ -198,13 +206,17 @@ export async function toggleSavedCar(carId) {
   try {
     
     const { userId } = await auth();
-    if (!userId) throw new Error("Unauthorized");
+    if (!userId) {
+      return { success: false, error: "Unauthorized" };
+    }
 
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
     });
 
-    if (!user) throw new Error("User not found");
+     if (!user) {
+      return { success: false, error: "User not found" };
+    }
 
     // Check if car exists
     const car = await db.car.findUnique({
@@ -264,7 +276,10 @@ export async function toggleSavedCar(carId) {
     };
 
   } catch (error) {
-     throw new Error("Error toggling saved car:" + error.message);
+    return {
+      success: false,
+      error: `Error toggling saved car: ${error?.message || String(error)}`,
+    };
   }
 }
 
@@ -316,13 +331,23 @@ export async function getSavedCars() {
     console.error("Error fetching saved cars:", error);
     return {
       success: false,
-      error: error.message,
+      error: error?.message || String(error),
     };
   }
 }
 
+const _carCache = new Map(); // key: carId, value: { ts, result }
+const CAR_CACHE_TTL_MS = 5000; // 5 seconds
+
 export async function getCarById(carId) {
   try {
+    // Simple short-lived cache to avoid duplicate DB hit for the same id
+    const now = Date.now();
+    const cached = _carCache.get(carId);
+    if (cached && now - cached.ts < CAR_CACHE_TTL_MS) {
+      return cached.result;
+    }
+
     const { userId } = await auth();
     let dbUser = null;
 
@@ -337,11 +362,11 @@ export async function getCarById(carId) {
     });
 
 
-    if(!car) {
-      return {
-        success: false,
-        error: "Car not found",
-      };
+    if (!car) {
+      const notFoundResult = { success: false, error: "Car not found" };
+      // cache negative responses briefly too (optional)
+      _carCache.set(carId, { ts: now, result: notFoundResult });
+      return notFoundResult;
     }
 
     let isWishlisted = false;
@@ -394,7 +419,7 @@ export async function getCarById(carId) {
       },
     });
 
-    return {
+    const successResult = {
       success: true,
       data: {
         ...serializeCarData(car, isWishlisted),
@@ -417,8 +442,16 @@ export async function getCarById(carId) {
       },
     };
 
+     // store in cache
+    _carCache.set(carId, { ts: now, result: successResult });
 
+    return successResult;
+    
   } catch (error) {
-    throw new Error("Error fetching car details:" + error.message);
+    // Return structured error instead of throwing
+    return {
+      success: false,
+      error: `Error fetching car details: ${error?.message || String(error)}`,
+    };
   }
 }

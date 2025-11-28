@@ -1,22 +1,19 @@
-import arcjet, { createMiddleware, detectBot, shield } from '@arcjet/next';
-import { auth, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
+import arcjet, { detectBot, shield } from "@arcjet/next";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-//create route for Admin, user
+// Protected Routes
 const isProtectedRoute = createRouteMatcher([
   "/admin(.*)",
   "/saved-cars(.*)",
   "/reservation(.*)",
-
 ]);
 
+// Arcjet config
 const aj = arcjet({
   key: process.env.ARCJET_KEY,
-
   rules: [
-    shield({
-      mode: "LIVE",
-    }),
+    shield({ mode: "LIVE" }),
     detectBot({
       mode: "LIVE",
       allow: ["CATEGORY:SEARCH_ENGINE"],
@@ -24,25 +21,29 @@ const aj = arcjet({
   ],
 });
 
-// User Login hai ya nhi check krega
-const clerk = clerkMiddleware(async(auth, req) => {
-  const { userId } = await auth();
+// Middleware final
+export default clerkMiddleware(async (auth, req) => {
+  // 🛡️ First: Apply Arcjet protection
+  const decision = await aj.protect(req);
 
-  if(!userId && isProtectedRoute(req)) {
-    const { redirectToSignIn } = await auth();
+  if (decision.isDenied()) {
+    return NextResponse.json({ error: "Access Denied!" }, { status: 403 });
+  }
+
+  // 🔐 Now check auth
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId && isProtectedRoute(req)) {
     return redirectToSignIn();
   }
 
   return NextResponse.next();
 });
 
-export default createMiddleware(aj, clerk);
-
+// Matcher config
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
+    "/((?!_next|.*\\..*).*)",
+    "/api/:path*",
   ],
 };

@@ -6,6 +6,7 @@ const inter = Inter({subsets:["latin"]})
 import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from "sonner";
 import { Facebook, Image, Instagram } from "lucide-react";
+import WhatsappFloating from "./(main)/cars/_components/whatsappFloating";
 
 
 export const metadata = {
@@ -43,7 +44,7 @@ export default function RootLayout({ children }) {
               </p>
             </div>
           </footer>
-
+        <WhatsappFloating />
         </body>
       </html>
     </ClerkProvider>
