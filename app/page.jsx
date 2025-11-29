@@ -18,8 +18,8 @@ export default async function Home() {
 
     {/* HERO SECTION NEW UI */}
     <section className="relative overflow-hidden py-7 bg-cover bg-center bg-no-repeat bg-fixed animate-fadeZoom"  
-      style={{backgroundImage: "url('/HeroSection/hero1.webp')"}}>    
-      <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px]"/>
+      style={{backgroundImage: "url('/HeroSection/HomeCar2.png')"}}>    
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"/>
 
         {/* Title */}
         <div className="relative z-10 text-center max-w-5xl mx-auto px-4 ">
