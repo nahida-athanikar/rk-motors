@@ -1,165 +1,132 @@
-<!-- ===================== 3D HERO SECTION ===================== -->
+<!-- ===================== HERO SECTION ===================== -->
 
-<h1 align="center">
-  🚗 RK MOTORS
-</h1>
+<h1 align="center">🚗 My Car Guide</h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=24&pause=1000&color=00F7FF&center=true&vCenter=true&width=700&lines=AI+Powered+Car+Marketplace;Smart+Image-Based+Car+Search;Next-Gen+Automobile+Platform" />
+  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=22&pause=1000&color=00F7FF&center=true&vCenter=true&width=750&lines=Smart+Car+Discovery+Platform;Advanced+Filtering+%26+Test+Drive+Scheduling;Full+Stack+MERN+%2B+Next.js+Application" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/AI%20Enabled-Yes-00f7ff?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Smart%20Search-3D%20Experience-purple?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Frontend-React.js-61DAFB?style=for-the-badge&logo=react"/>
+  <img src="https://img.shields.io/badge/Backend-Next.js%20%7C%20Express.js-black?style=for-the-badge&logo=next.js"/>
+  <img src="https://img.shields.io/badge/Database-Supabase-3FCF8E?style=for-the-badge&logo=supabase"/>
+  <img src="https://img.shields.io/badge/ORM-Prisma-2D3748?style=for-the-badge&logo=prisma"/>
+  <img src="https://img.shields.io/badge/Auth-Clerk-6C47FF?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Security-Arcjet-red?style=for-the-badge"/>
 </p>
 
 ---
 
-## 🧊 Project in a Nutshell (3D Card Style)
+## 📌 Project Overview
 
-```
-┌────────────────────────────────────────────┐
-│  🚘 RK Motors                              │
-│                                            │
-│  ▸ Buy & Sell Cars Smarter                 │
-│  ▸ AI Image Recognition                    │
-│  ▸ Auto Car Detail Extraction              │
-│  ▸ Secure Authentication                  │
-│  ▸ Fast, Responsive UI                    │
-│                                            │
-│  ⚡ Built for Real-World Usage             │
-└────────────────────────────────────────────┘
+**My Car Guide** is a full-stack web application designed to simplify the car selection process by providing **advanced filtering**, **detailed car listings**, and **online test-drive scheduling** on a single platform.
 
-```md
+The project focuses on **usability, performance, and real-world problem solving**, making it suitable for modern automobile service platforms.
 
-🌟 Overview
 
-RK Motors is a modern, AI-enabled car marketplace designed to simplify the process of buying and selling vehicles.
-The platform combines intelligent image-based AI features, secure authentication, and a clean user experience to help users find the right car faster and smarter.
+## 🚀 Key Features
 
-🔹 Built with real-world problems in mind
-🔹 Focused on automation, accuracy, and usability
+### 🔍 Smart Car Discovery
+- Filter cars by **fuel type**, **body type**, **model**, and more  
+- Quick and accurate search results  
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━</p>
-🚀 Core Features
-🧠 AI-Driven Capabilities
+### 📅 Test Drive Scheduling
+- Users can book test drives by selecting **date and time**
+- Reduces manual coordination with dealers  
 
-AI Car Upload (Admin Feature)
-Upload a car image → AI automatically extracts car details and fills the form
-✔ Saves time
-✔ Reduces manual errors
+### 🔐 Authentication & Security
+- Secure authentication using **Clerk**
+- API protection and rate limiting using **Arcjet**
 
-AI Image Search for Users
-Users can upload a car image and instantly get matching cars from the database
+### ⚙️ Backend & Data Management
+- REST APIs built using **Next.js + Express.js**
+- **Prisma ORM** for type-safe database access
+- **Supabase** as a scalable cloud database
 
-🔐 Authentication & Roles
+### 🤖 AI Integration
+- **Gemini API** used for intelligent API-based features and enhancements
 
-Secure User & Admin Login
+---
 
-Role-based access control
+## 🛠️ Tech Stack
 
-JWT-based authentication for protected routes
+### Frontend
+- React.js  
+- Modern UI principles  
+- Responsive design  
 
-🚘 Marketplace Features
+### Backend
+- Next.js  
+- Node.js  
+- Express.js  
 
-Add, update, and manage car listings
+### Database & ORM
+- Supabase  
+- Prisma ORM  
 
-Advanced car search (name, brand, image-based)
+### Authentication & Security
+- Clerk Authentication  
+- Arcjet Security  
 
-Detailed car information pages
+### APIs
+- Gemini API  
 
-Clean and responsive UI for all devices
 
-⚡ Performance & UX
+---
 
-Fast page loads and optimized queries
+## 📈 Impact on Users
 
-Modern UI with smooth interactions
+- ⏱️ Saves time by centralizing car search and booking  
+- 🎯 Improves decision-making with advanced filters  
+- 📱 Provides a smooth and user-friendly experience  
+- 🔒 Ensures secure and reliable access  
 
-Mobile-first responsive design
+---
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━</p>
-🚀 Tech Stack — System Pipeline
-┌──────────────┐
-│   👤 USER    │
-└──────┬───────┘
-       │  Request
-       ▼
-┌──────────────────────┐
-│ 🌐 FRONTEND LAYER    │
-│ React / Next.js     │
-│ Tailwind CSS        │
-└──────┬──────────────┘
-       │  API Call
-       ▼
-┌──────────────────────┐
-│ ⚙️ BACKEND API       │
-│ Node.js              │
-│ Express.js           │
-│ JWT Authentication   │
-└──────┬──────────────┘
-       │  Process
-       ▼
-┌──────────────────────┐
-│ 🧠 AI ENGINE         │
-│ Image Recognition    │
-│ Auto Data Extraction │
-└──────┬──────────────┘
-       │  Store / Fetch
-       ▼
-┌──────────────────────┐
-│ 🗄️ DATABASE          │
-│ MongoDB              │
-│ Mongoose ODM         │
-└──────┬──────────────┘
-       │  Media / Deploy
-       ▼
-┌──────────────────────┐
-│ ☁️ CLOUD & HOSTING   │
-│ Cloudinary           │
-│ Render               │
-└──────────────────────┘
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━</p>
-📸 Screenshots
+## 🎯 What I Learned
 
-(Add your actual screenshots here)
+- Building a **production-style full-stack application**
+- Integrating modern authentication and security tools
+- Working with **Prisma ORM & Supabase**
+- Designing scalable backend architecture
+- Creating recruiter-friendly GitHub projects
 
-Home Page
+---
 
-AI Car Upload
+## 🔮 Future Scope
 
-AI Image Search
+- AI-based car recommendations  
+- Cloud deployment and scaling  
+- Mobile app version  
+- Integration with real dealership systems  
 
-Car Details Page
+---
 
-Admin Dashboard
+## 📸 Screenshots
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━</p>
-🎯 What I Learned
+> _(Add screenshots of your application here)_
 
-Designing AI-assisted real-world features
+- Home Page  
+- Car Filters  
+- Test Drive Booking  
+- Car Details Page  
 
-Building secure full-stack applications
+---
 
-Integrating AI workflows with backend logic
+## 🌍 Live Demo & Repository
 
-Structuring scalable frontend & backend architecture
+- 🔗 **Live Project:** _(Add link)_  
+- 📦 **GitHub Repository:** _(Add link)_  
 
-Creating recruiter-friendly, production-ready projects
+---
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━</p>
-🌍 Live Demo & Source Code
+## 🤝 Connect With Me
 
-🔗 Live Project: Add your live link here
-📦 GitHub Repository: Add repo link here
+If you like this project or have suggestions, feel free to connect.  
+Feedback and collaboration are always welcome 🚀  
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━</p>
-🤝 Connect
+<p align="center">⭐ If you find this project helpful, don’t forget to star the repository!</p>
 
-If you like this project or want to collaborate, feel free to connect 🚀
-Suggestions and feedback are always welcome!
 
-<p align="center"> ⭐ If you find this project interesting, don’t forget to star the repo! </p> ```
 
 

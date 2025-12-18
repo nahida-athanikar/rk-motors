@@ -314,7 +314,7 @@ export const AddCarForm = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {/* Make */}
                   <div className="space-y-2">
                     <Label htmlFor="make">Make</Label>
@@ -495,8 +495,8 @@ export const AddCarForm = () => {
                   {/* Seats */}
                   <div className="space-y-2">
                     <Label htmlFor="seats">
-                      Number of Seats{" "}
-                      <span className="text-sm text-gray-500">(Optional)</span>
+                      Number of Seats
+                     
                     </Label>
                     <Input
                       id="seats"
@@ -694,7 +694,7 @@ export const AddCarForm = () => {
                             </>
                           ) : (
                             <>
-                              <Camera className="mr-2 h-4 w-4" />
+                              <Camera className="mr-2 h-4 w-4 z-50" />
                               Extract Details
                             </>
                           )}
@@ -708,7 +708,7 @@ export const AddCarForm = () => {
                     >
                       <input {...getAiInputProps()} />
                       <div className="flex flex-col items-center justify-center">
-                        <Camera className="h-12 w-12 text-gray-400 mb-3" />
+                        <Camera className="h-12 w-12 text-gray-400 mb-3 z-50" />
                         <span className="text-sm text-gray-600">
                           Drag & drop or click to upload a car image
                         </span>

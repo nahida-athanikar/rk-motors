@@ -247,12 +247,12 @@ const TestDriveForm = ({ car, testDriveInfo }) => {
 
 
   return (
-     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+     <div className="grid grid-cols-1 md:grid-cols-3">
       {/* Left Column - Car Summary */}
       <div className="md:col-span-1">
         <Card>
-          <CardContent className="p-6">
-            <h2 className="text-xl font-bold mb-4">Car Details</h2>
+          <CardContent>
+            <h2 className="text-xl font-bold mb-4 -mt-2">Car Details</h2>
 
             <div className="aspect-video rounded-lg overflow-hidden relative mb-4">
               {car.images && car.images.length > 0 ? (
@@ -304,7 +304,7 @@ const TestDriveForm = ({ car, testDriveInfo }) => {
         </Card>
 
         {/* Dealership Info */}
-        <Card className="mt-6">
+        <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-bold mb-4">Dealership Info</h2>
             <div className="text-sm">

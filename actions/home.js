@@ -5,28 +5,29 @@ import { db } from "@/lib/prisma";
 import aj from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { unstable_cache } from "next/cache";
 
+export const getFeaturedCars = unstable_cache(
+  async (limit = 10) => {
+    try {
+      const cars = await db.car.findMany({
+        where: {
+          featured: true,
+          status: "AVAILABLE",
+        },
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      });
 
-
-export async function getFeaturedCars(limit = 10) {
-  try {
-    const cars = await db.car.findMany({
-      where: {
-        featured: true,
-        status: "AVAILABLE",
-      },
-      take: limit,
-      orderBy: {createdAt: "desc"},
-
-    });
-
-    return cars.map(serializeCarData);
-
-  }catch(err) {
-    throw new Error("Error fetching featured cars:" + (err?.message || String(err)));
-    
-  }
-}
+      return cars.map(serializeCarData);
+    } catch (err) {
+      console.error("Featured cars DB error:", err);
+      return []; // ❗ IMPORTANT
+    }
+  },
+  ["featured-cars"],
+  { revalidate: 60 }
+);
 
 // Function to convert File to base64
 async function fileToBase64(file) {
@@ -121,7 +122,12 @@ export async function processImageSearch(file) {
           };
         }
 
-  } catch(error) {
-    throw new Error("AI Search error:" + error.message);
-  }
+  } catch (error) {
+  console.error("AI Search error:", error);
+
+    return {
+      success: false,
+      error: "AI service temporarily unavailable. Please try again.",
+    };
+  } 
 }

@@ -1,21 +1,31 @@
-import { getDashboardData } from "@/actions/admin";
+"use client";
+
+import { useEffect, useState } from "react";
 import { Dashboard } from "./_components/dashboard";
+import { getDashboardData } from "@/actions/admin";
 
+export default function AdminDashboardPage() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    async function loadDashboard() {
+      const result = await getDashboardData(); // ✅ server action
+      setData(result);
+      setLoading(false);
+    }
 
-export const metadata = {
-  title: "Dashboard | RK Motors Admin",
-  description: "Admin dashboard for RK Motors",
-};
+    loadDashboard();
+  }, []);
 
-export default async function AdminDashboardPage() {
-  // Fetch dashboard data
-  const dashboardData = await getDashboardData();
+  if (loading) {
+    return <p>Loading dashboard...</p>;
+  }
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-      <Dashboard initialData={dashboardData} />
+      <Dashboard initialData={data} />
     </div>
   );
 }

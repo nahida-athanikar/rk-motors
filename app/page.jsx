@@ -1,3 +1,7 @@
+import { Suspense } from "react";
+import FeaturedCarsServer from "@/components/FeaturedCarsServer";
+import FeaturedCarsMarquee from "@/components/FeaturedCarsMarquee";
+
 import { Button } from "@/components/ui/button";
 import HomeSearch from "@/components/home-search";
 import { Calendar, Car, ChevronRight, Shield } from "lucide-react";
@@ -7,11 +11,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SignedOut } from "@clerk/nextjs";
-import { getFeaturedCars } from "@/actions/home";
+//import { getFeaturedCars } from "@/actions/home";
+
+
 
 export default async function Home() {
 
-  const featuredCars = await getFeaturedCars();
+  //const featuredCars = await getFeaturedCars();
 
   return (
   <div className="pt-16 flex flex-col">
@@ -19,7 +25,7 @@ export default async function Home() {
     {/* HERO SECTION NEW UI */}
     <section className="relative overflow-hidden py-7 bg-cover bg-center bg-no-repeat bg-fixed animate-fadeZoom"  
       style={{backgroundImage: "url('/HeroSection/HomeCar2.png')"}}>    
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"/>
+      <div className="absolute inset-0 bg-black/30"/>
 
         {/* Title */}
         <div className="relative z-10 text-center max-w-5xl mx-auto px-4 ">
@@ -33,7 +39,7 @@ export default async function Home() {
             </span>
           </h1>
 
-          <p className="max-w-lg mx-auto text-[#E5D6D6] text-base md:text-xl leading-relaxed mb-8">
+          <p className="max-w-lg mx-auto text-[#e9e6f9] text-base font-semibold  md:text-xl leading-relaxed mb-8">
             From buying, selling, insurance to exchange — RK Motors ensures honest deals,
             quality cars, and complete customer satisfaction every step of the way.
           </p>
@@ -42,41 +48,10 @@ export default async function Home() {
           <HomeSearch />
         </div>
 
-        {/* CAR MARQUEE ANIMATION */}
-        <div className="mt-12 pointer-events-none select-none">
-        <div className="relative w-full overflow-hidden">
-          
-          <div className="flex space-x-12 animate-marquee">
-            {[...featuredCars, ...featuredCars].map((car, index) => (
-              <div
-                key={`${car.id}-${index}`}
-                className="relative h-48 w-80 rounded-xl overflow-hidden shadow-lg group"
-              >             
-              </div>
-            ))}
-          </div>
+        <Suspense fallback={null}>
+          <FeaturedCarsMarquee />
+        </Suspense>
 
-          {/* Duplicate Track for Seamless Loop  */}
-          <div className="flex space-x-12 absolute top-0 animate-marquee2">
-            {[...featuredCars, ...featuredCars].map((car, index) => (
-              <div
-                key={`dup-${car.id}-${index}`}
-                className="relative h-48 w-80 rounded-xl overflow-hidden shadow-lg group"
-              >
-                <Image
-                  src={car.images[0]}
-                  alt="car"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute bottom-0 inset-x-0 bg-black/60 p-3 text-white text-center text-sm">
-                  {car.make} {car.model}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
 
 
@@ -112,11 +87,10 @@ export default async function Home() {
             "
             style={{ scrollbarWidth: "none" }}
           >
-            {featuredCars.map((car) => (
-              <div key={car.id} className="w-72 flex-shrink-0 snap-start">
-                <CarCard car={car} />
-              </div>
-            ))}
+            <Suspense fallback={<p className="text-center">Loading featured cars...</p>}>
+                <FeaturedCarsServer />
+            </Suspense>
+
           </div>
 
         </div>

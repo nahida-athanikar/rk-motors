@@ -20,7 +20,7 @@ const TestDrivePage = async ({ params }) => {
 
   return (
      <div className="container mx-auto px-4">
-      <h1 className="text-6xl mb-6 gradient-title">Book a Test Drive</h1>
+      <h1 className="text-3xl md:text-4xl lg:text-5xl mb-2 gradient-title">Book a Test Drive</h1>
       <TestDriveForm
         car={result.data}
         testDriveInfo={result.data.testDriveInfo}
