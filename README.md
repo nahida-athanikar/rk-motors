@@ -1,6 +1,6 @@
 <!-- ===================== HERO SECTION ===================== -->
 
-<h1 align="center">🚗 My Car Guide</h1>
+<h1 align="center">🚗 RK Motors – AI Powered Car Marketplace</h1>
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=22&pause=1000&color=00F7FF&center=true&vCenter=true&width=750&lines=Smart+Car+Discovery+Platform;Advanced+Filtering+%26+Test+Drive+Scheduling;Full+Stack+MERN+%2B+Next.js+Application" />
@@ -19,9 +19,12 @@
 
 ## 📌 Project Overview
 
-**My Car Guide** is a full-stack web application designed to simplify the car selection process by providing **advanced filtering**, **detailed car listings**, and **online test-drive scheduling** on a single platform.
+**RK Motors** is an **AI-powered car marketplace** built to simplify the car buying journey by providing  
+**smart search**, **advanced filtering**, and **online test-drive scheduling** on a single platform.
 
-The project focuses on **usability, performance, and real-world problem solving**, making it suitable for modern automobile service platforms.
+
+This project was inspired by a **real-world problem** where users repeatedly struggle to search, compare, and coordinate car details with dealers.  
+The platform focuses on **performance, scalability, and real-world usability**, making it suitable for modern automobile services.
 
 
 ## 🚀 Key Features
@@ -52,8 +55,7 @@ The project focuses on **usability, performance, and real-world problem solving*
 
 ### Frontend
 - React.js  
-- Modern UI principles  
-- Responsive design  
+- Responsive UI with modern design principles 
 
 ### Backend
 - Next.js  
@@ -66,7 +68,7 @@ The project focuses on **usability, performance, and real-world problem solving*
 
 ### Authentication & Security
 - Clerk Authentication  
-- Arcjet Security  
+- Arcjet Security (Rate limiting & security) 
 
 ### APIs
 - Gemini API  
@@ -76,10 +78,10 @@ The project focuses on **usability, performance, and real-world problem solving*
 
 ## 📈 Impact on Users
 
-- ⏱️ Saves time by centralizing car search and booking  
-- 🎯 Improves decision-making with advanced filters  
-- 📱 Provides a smooth and user-friendly experience  
-- 🔒 Ensures secure and reliable access  
+- ⏱️ Reduces time spent on searching and booking test drives  
+- 🎯 Improves decision-making with smart filters  
+- 📱 Smooth, responsive, and user-friendly interface  
+- 🔒 Secure access with modern authentication and security practices  
 
 ---
 
@@ -89,7 +91,6 @@ The project focuses on **usability, performance, and real-world problem solving*
 - Integrating modern authentication and security tools
 - Working with **Prisma ORM & Supabase**
 - Designing scalable backend architecture
-- Creating recruiter-friendly GitHub projects
 
 ---
 
@@ -102,9 +103,8 @@ The project focuses on **usability, performance, and real-world problem solving*
 
 ---
 
-## 📸 Screenshots
+## 📸 Snapshots
 
-> _(Add screenshots of your application here)_
 
 - Home Page  
 - Car Filters  
@@ -115,15 +115,15 @@ The project focuses on **usability, performance, and real-world problem solving*
 
 ## 🌍 Live Demo & Repository
 
-- 🔗 **Live Project:** _(Add link)_  
-- 📦 **GitHub Repository:** _(Add link)_  
+- 🔗 **Live Project:**  https://rk-motors-blond.vercel.app/
+- 📦 **GitHub Repository:** [https://github.com/nahida-athanikar/rk-motors](RK Motors) 
 
 ---
 
 ## 🤝 Connect With Me
 
 If you like this project or have suggestions, feel free to connect.  
-Feedback and collaboration are always welcome 🚀  
+ 
 
 <p align="center">⭐ If you find this project helpful, don’t forget to star the repository!</p>
 
