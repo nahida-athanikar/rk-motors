@@ -103,20 +103,55 @@ The platform focuses on **performance, scalability, and real-world usability**, 
 
 ---
 
-## 📸 Snapshots
+## 📸 Application Snapshots
+
+### 🏠 Home Page
+![Home Page](public/snapshots/HomePage.png)
+
+### 🔍 Browse Cars & Filters
+![Browse Cars](public/snapshots/browse-cars-page.png)
+
+### 🚘 Car Details & EMI Calculator
+![Car Details](public/snapshots/car-details-page.png)
+
+### ⭐ Featured Cars
+![Featured Cars](public/snapshots/featured-cars-section.png)
+
+### ❓ Frequently Asked Questions
+![FAQ](public/snapshots/faq-section.png)
+
+### 🤖 Image-Based AI Car Search
+![AI Image Search](public/snapshots/AI-search-image.png)
+
+### 🔐 Authentication (Clerk)
+![Login](public/snapshots/loginPage.png)
+
+---
+
+## 🛠️ Admin Panel
+
+### 📊 Admin Dashboard
+![Admin Dashboard](public/snapshots/admin-dashboard.png)
+
+### 🚗 Cars Management
+![Cars Management](public/snapshots/admin-cars-management.png)
+
+### Add car detail 
+![Manually Entry](public/snapshots/Manual-entry-section.png)
+
+![AI Upload Entry](public/snapshots/AI-Upload-section.png)
 
 
-- Home Page  
-- Car Filters  
-- Test Drive Booking  
-- Car Details Page  
+### 📅 Test Drive Management
+![Test Drives](public/snapshots/admin-test-drives-manage.png)
+
 
 ---
 
 ## 🌍 Live Demo & Repository
 
 - 🔗 **Live Project:**  https://rk-motors-blond.vercel.app/
-- 📦 **GitHub Repository:** [https://github.com/nahida-athanikar/rk-motors](RK Motors) 
+- 📦 **GitHub Repository:** [https://github.com/nahida-athanikar/rk-motors] 
 
 ---
 
