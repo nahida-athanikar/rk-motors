@@ -41,7 +41,7 @@ Looking forward to your reply.`;
       `}</style>
 
       <a
-        href={`https://wa.me/919112292021?text=${encodeURIComponent(message)}`}
+        href={`https://wa.me/917796000786?text=${encodeURIComponent(message)}`}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 z-50"

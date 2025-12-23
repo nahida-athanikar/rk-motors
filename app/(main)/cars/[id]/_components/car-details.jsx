@@ -334,7 +334,7 @@ const CarDetails = ({ car, testDriveInfo }) => {
                 </Button>
                 
                 {/* Call */}
-              <a href={`tel:+91${car.ownerPhone || "9373020904"}`}>
+              <a href={`tel:+91${car.ownerPhone || "8421000786"}`}>
                 <Button className="w-full py-3 text-sm sm:text-base font-medium bg-green-600 hover:bg-green-500 text-white rounded-lg">
                   📞 Call Now
                 </Button>
