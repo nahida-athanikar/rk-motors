@@ -15,6 +15,7 @@ import { SignedOut } from "@clerk/nextjs";
 
 
 
+
 export default async function Home() {
 
   //const featuredCars = await getFeaturedCars();
@@ -46,13 +47,50 @@ export default async function Home() {
 
           {/* Search */}
           <HomeSearch />
+
         </div>
 
         <Suspense fallback={null}>
           <FeaturedCarsMarquee />
         </Suspense>
-
     </section>
+
+    {/* AI Recommendation Highlight Section */}
+      <section className="px-4 mt-7">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="flex items-center justify-between gap-1 rounded-xl border border-black/15 bg-white px-2 py-4 shadow-sm">
+            
+            {/* Left */}
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-12 md:h-12 md:w-12 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                🤖
+              </div>
+
+              <div className="leading-tight">
+                <p className="text-sm font-semibold text-gray-900">
+                  AI Car Recommendation
+                </p>
+                <p className="text-xs text-gray-600">
+                  Find the best car based on your budget & needs
+                </p>
+              </div>
+            </div>
+
+            {/* Right */}
+            <Link
+              href="/ai-recommendation"
+              className="flex items-center gap-6 rounded-lg bg-black px-4 py-1.5 md:py-2 lg:py-2 text-sm font-medium text-white hover:opacity-90"
+            >Try AI
+              <span>→</span>
+            </Link>
+
+          </div>
+
+        </div>
+      </section>
+
+
 
 
     {/* Featured car */}
@@ -61,7 +99,7 @@ export default async function Home() {
 
           {/* Heading */}
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-br from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-black via-[#3a3030] to-[#ff5858] text-transparent bg-clip-text">
               Featured Cars
             </h2>
 
@@ -98,10 +136,10 @@ export default async function Home() {
 
 
     {/* Explore Popular Brands */}
-      <section className="bg-gray-50 -mt-10 lg:px-8">
+      <section className="-mt-12 lg:px-8">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-br from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-black via-[#3a3030] to-[#ff5858] text-transparent bg-clip-text">
               Explore Brands</h2>
 
             <Button variant="link" asChild className="flex items-center gap-1">
@@ -140,12 +178,12 @@ export default async function Home() {
       </section>
       
     {/* Why choose RK motors */}
-    <section className="py-5 mt-3 lg:px-8">
+    <section className="py-5 mt-3 md:mt-7 lg:mt-7 lg:px-8">
         <div className="container mx-auto px-4">
 
           {/* Heading */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-5 tracking-tight">
-            <span className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-br from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text">
+            <span className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-black via-[#3a3030] to-[#ff5858] text-transparent bg-clip-text">
               Why Choose RK Motors
             </span>
           </h2>
@@ -208,10 +246,10 @@ export default async function Home() {
 
 
     {/* Explore by Body Type */}
-    <section className="bg-gray-50 mt-3 lg:px-8">
+    <section className="mt-3 md:mt-6 lg:mt-7 lg:px-8">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-br from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text ">Explore Body Type</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-black via-[#3a3030] to-[#f14e4e] text-transparent bg-clip-text">Explore Body Type</h2>
           <Button variant="link" className="flex items-center gap-1" asChild>
             <Link href="/cars">
             View All<ChevronRight className="h-4 w-4" />
@@ -252,7 +290,7 @@ export default async function Home() {
     
     
      {/* FAQ */}
-    <section className="mt-3 py-2 bg-gray-50">
+    <section className="mt-5 md:mt-6 lg:mt-7 py-2">
        <div className="container mx-auto px-4 max-w-4xl">
     
         {/* Section Heading */}
@@ -288,7 +326,7 @@ export default async function Home() {
 
 
    {/* Dream car */}
-  <section className="relative overflow-hidden py-9 flex items-center justify-center bg-center bg-cover"
+  <section className="mt-3 relative overflow-hidden py-9 flex items-center justify-center bg-center bg-cover"
   style={{ backgroundImage: "url('/HeroSection/hero6.webp')"}}>
     {/* Dark Overlay */}
     <div className="absolute inset-0 bg-black/60"></div>
