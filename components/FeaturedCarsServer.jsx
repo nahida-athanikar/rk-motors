@@ -5,8 +5,9 @@ export default async function FeaturedCarsServer() {
   const featuredCars = await getFeaturedCars(10);
 
   if (!featuredCars || featuredCars.length === 0) {
-    return <p className="text-gray-500">No featured cars found</p>;
+  return null;
   }
+
 
   return (
     <div className="flex space-x-6 overflow-x-auto pb-4">

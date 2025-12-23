@@ -7,27 +7,24 @@ import { request } from "@arcjet/next";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { unstable_cache } from "next/cache";
 
-export const getFeaturedCars = unstable_cache(
-  async (limit = 10) => {
-    try {
-      const cars = await db.car.findMany({
-        where: {
-          featured: true,
-          status: "AVAILABLE",
-        },
-        take: limit,
-        orderBy: { createdAt: "desc" },
-      });
+export async function getFeaturedCars(limit = 10) {
+  try {
+    const cars = await db.car.findMany({
+      where: {
+        featured: true,
+        status: "AVAILABLE",
+      },
+      take: limit,
+      orderBy: { createdAt: "desc" },
+    });
 
-      return cars.map(serializeCarData);
-    } catch (err) {
-      console.error("Featured cars DB error:", err);
-      return []; // ❗ IMPORTANT
-    }
-  },
-  ["featured-cars"],
-  { revalidate: 60 }
-);
+    return cars.map(serializeCarData);
+  } catch (err) {
+    console.error("Featured cars DB error:", err);
+    return [];
+  }
+}
+
 
 // Function to convert File to base64
 async function fileToBase64(file) {
