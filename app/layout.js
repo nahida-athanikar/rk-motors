@@ -7,6 +7,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from "sonner";
 import { Facebook, Image, Instagram } from "lucide-react";
 import WhatsappFloating from "./(main)/cars/_components/whatsappFloating";
+import UserChatbot from "@/components/UserChatbot";
+import AIChatWidget from "@/components/AIChatWidget";
 
 
 export const metadata = {
@@ -45,6 +47,7 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         <WhatsappFloating />
+        <AIChatWidget />
         </body>
       </html>
     </ClerkProvider>

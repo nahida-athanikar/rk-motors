@@ -197,8 +197,7 @@ bg-transparent backdrop-blur-md shadow-[0_0_25px_rgba(255,0,0,0.15)] transition-
           {imagePreview && (
             <Button
   type="submit"
-  className="w-full mt-3 rounded-full py-4 font-semibold 
-  bg-gradient-to-r from-red-600 via-red-500 to-red-700 
+  className="w-full mt-3 rounded-full py-4 font-semibold bg-gradient-to-r from-red-600 via-red-500 to-red-700 
   text-white shadow-[0_0_20px_rgba(255,0,0,0.35)] hover:opacity-90 transition"
 
               disabled={isUploading || isProcessing}
