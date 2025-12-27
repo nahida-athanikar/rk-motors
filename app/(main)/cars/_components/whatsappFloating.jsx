@@ -31,14 +31,7 @@ Looking forward to your reply.`;
   
   return (
     <>
-      <style jsx>{`
-        @keyframes bounceShrink {
-          0% { transform: translateY(0) scale(1); }
-          30% { transform: translateY(-6px) scale(0.92); }
-          60% { transform: translateY(4px) scale(1.05); }
-          100% { transform: translateY(0) scale(1); }
-        }
-      `}</style>
+      
 
       <a
         href={`https://wa.me/917796000786?text=${encodeURIComponent(message)}`}
@@ -49,7 +42,7 @@ Looking forward to your reply.`;
         <img
           src="/whatsapp.webp"
           alt="WhatsApp"
-          className="w-18 h-18 hover:scale-110 drop-shadow-lg transition-all duration-300 animate-[bounceShrink_1.8s_ease-in-out_infinite]"
+          className="w-16 h-16 hover:scale-110 drop-shadow-lg transition-all duration-300"
         />
       </a>
     </>
