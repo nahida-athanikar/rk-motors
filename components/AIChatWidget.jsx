@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { X, Mic } from "lucide-react";
 import { sendMessageToAI } from "./UserChatbot";
-
+import Image from "next/image";
 
 
 // Voice Recognition setup
@@ -182,7 +182,7 @@ export default function AIChatWidget() {
           className="fixed bottom-24 right-5 w-16 h-16 rounded-full bg-black shadow-xl hover:scale-110 transition z-50 flex items-center justify-center animate-[bounceShrink_1.8s_ease-in-out_infinite]"
         >
           <img
-            src="./AI_logo.png"
+            src="/AI_logo.png"
             alt="Rajnikant AI"
             className="w-15 h-15 rounded-full object-cover"
           />
