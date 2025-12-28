@@ -1,6 +1,7 @@
 // Isme car overview  ka sb edit krna hai.
 "use client";
 
+
 import { toggleSavedCar } from '@/actions/car-listing';
 import { Alert, AlertDescription, AlertTitle, AlertCircle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
@@ -25,7 +26,6 @@ import EmiCalculator from './emi-calculator';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { format } from 'date-fns';
 import WhatsappFloating from '../../_components/whatsappFloating';
-
 
 
 
@@ -374,77 +374,73 @@ const CarDetails = ({ car, testDriveInfo }) => {
       </div>
 
       {/* Details & Features Section */}
-<div className="mt-5 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-    
-    {/* Description */}
-    <div>
-      <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text mb-4">
-        Description
-      </h3>
-      <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-        {car.description}
-      </p>
-    </div>
-    
-    {/* Features */}
-    <div>
-      <h3 className="text-2xl md:text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-[#FF4B4B] to-[#B30000] text-transparent bg-clip-text mb-4">
-        Features
-      </h3>
-      <div className="flex flex-wrap gap-3">
-        <span className="px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-full shadow-sm">
-          {car.transmission} Transmission
-        </span>
-        <span className="px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-full shadow-sm">
-          {car.fuelType} Engine
-        </span>
-        <span className="px-4 py-2 bg-blue-50 text-blue-700 font-medium rounded-full shadow-sm">
-          {car.bodyType} Body Style
-        </span>
-        
-        
+      <div className="mt-8 p-2 lg:px-6">
+        <h2 className="text-2xl font-bold mb-4">
+          Description
+        </h2>
+
+        <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+          {car.description}
+        </p>
       </div>
-    </div>
 
-  </div>
-</div>
+      {/* Features Section */}
+      <div className="p-2 lg:px-6">
+        <h2 className="text-2xl font-bold mb-4">
+          Features
+        </h2>
 
+        <div className="flex flex-wrap gap-3">
+          {[
+            `${car.transmission} Transmission`,
+            `${car.fuelType} Engine`,
+            `${car.bodyType} Body Style`,
+          ].map((item) => (
+            <span
+              key={item}
+              className="px-5 py-2 rounded-full bg-white border border-blue-200 
+              text-blue-700 font-medium shadow-sm hover:shadow-md transition"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
 
-      {/* car Overview */}
-      <Card className="mt-8 rounded-2xl shadow-sm border bg-white">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Car Overview</CardTitle>
-      </CardHeader>
+          {/* car Overview */}
+      <div className="mt-5 p-2 lg:px-6">
+          <h2 className="text-2xl font-bold mb-4">
+              Car Overview
+          </h2>
+          <Card>
+            <CardContent className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {specs.map((item, index) => (
+                <div key={index}>
+                  <div className="flex items-start gap-3">
+                    <item.icon className="h-5 w-5 text-blue-600 mt-1" />
 
-      <CardContent className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-        {specs.map((item, index) => (
-          <div key={index}>
-            <div className="flex items-start gap-3">
-              <item.icon className="h-5 w-5 text-blue-600 mt-1" />
+                    <div>
+                      <p className="text-gray-500 text-sm">{item.label}</p>
+                      <p className="font-semibold text-[15px] mt-0.5">{item.value}</p>
+                    </div>
+                  </div>
 
-              <div>
-                <p className="text-gray-500 text-sm">{item.label}</p>
-                <p className="font-semibold text-[15px] mt-0.5">{item.value}</p>
-              </div>
-            </div>
-
-            {/* Divider except for last row */}
-            {(index + 1) % 3 !== 0 && (
-              <Separator className="mt-4 sm:hidden block" />
-            )}
-          </div>
-        ))}
-      </CardContent>
-     </Card>
-  
+                  {/* Divider except for last row */}
+                  {(index + 1) % 3 !== 0 && (
+                    <Separator className="mt-4 sm:hidden block" />
+                  )}
+                </div>
+              ))}
+            </CardContent>
+        </Card>
+      </div>
 
       {/* Dealership Location Section */}
-      <div className="mt-8">
-        <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-3">
+      <div className="mt-5 lg:px-6">
+        <div>
           <h2 className="text-2xl font-bold mb-6">Dealership Location</h2>
 
-          <div className="bg-gray-50 rounded-2xl p-6 flex flex-col lg:flex-row justify-between gap-8">
+          <div className="rounded-2xl border-2 p-6 flex flex-col lg:flex-row justify-between gap-8">
 
             {/* Left Side: Dealership Info */}
             <div className="flex items-start gap-2 flex-1">

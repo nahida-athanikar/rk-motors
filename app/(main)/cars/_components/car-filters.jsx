@@ -240,9 +240,9 @@ const CarFilters = ({ filters }) => {
 
       { /* Desktop Filters */}
        <div className="hidden lg:block sticky top-24">
-        <div className="border rounded-lg overflow-hidden bg-white">
-          <div className="p-4 border-b bg-gray-50 flex justify-between items-center">
-            <h3 className="font-medium flex items-center">
+        <div className="bg-transparent">
+          <div className="p-4 border-b border-black/10 bg-gradient-to-r from-white to-red-50 flex justify-between items-center">
+            <h3 className="text-sm font-semibold tracking-wide text-gray-800 flex items-center">
               <Sliders className="mr-2 h-4 w-4" />
               Filters
             </h3>
@@ -251,7 +251,7 @@ const CarFilters = ({ filters }) => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-8 text-sm text-gray-600"
+                className="h-7 px-2 text-xs text-gray-500 hover:text-black"
                 onClick={clearFilters}
               >
                 <X className="mr-1 h-3 w-3" />
@@ -260,7 +260,7 @@ const CarFilters = ({ filters }) => {
             )}
           </div>
 
-          <div className="p-4">
+          <div className="space-y-6 p-4">
             <CarFilterControls
               filters={filters}
               currentFilters={currentFilters}
@@ -269,7 +269,7 @@ const CarFilters = ({ filters }) => {
             />
           </div>
 
-          <div className="px-4 py-4 border-t">
+          <div className="pt-6">
             <Button onClick={applyFilters} className="w-full">
               Apply Filters
             </Button>

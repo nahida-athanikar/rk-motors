@@ -6,6 +6,8 @@ import { Suspense } from "react";
 import CarFilters from "./_components/car-filters";
 import CarListings from "./_components/car-listing";
 
+
+
 export const metadata = {
   title: "Cars | RK Motors",
   description: "Browse and search for your dream car",
@@ -16,14 +18,15 @@ const CarsPage = async () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-10">
-      <h1 className="text-5xl sm:text-5xl md:text-6xl 
-        font-extrabold gradient-title 
-        mb-4 sm:mb-8 leading-tight">
-        Browse Cars
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
+        <span className="rk-gradient-text">
+          Browse Cars
+        </span>
       </h1>
 
+
       <div className="flex flex-col lg:flex-row gap-3">
-        <div className="w-full lg:w-72 flex-shrink-0 sticky top-24 h-max">
+        <div className="w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-24 h-max pr-2">
           {/* 🔴 REQUIRED Suspense */}
           <Suspense fallback={<div>Loading filters...</div>}>
             <CarFilters filters={filtersData.data} />

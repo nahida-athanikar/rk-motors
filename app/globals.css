@@ -305,6 +305,17 @@ input, textarea, select {
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
 }
 
+.rk-gradient-text {
+  background: linear-gradient(
+    90deg,
+    #000000 0%,
+    #3a3030 45%,
+    #f14e4e 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 
 

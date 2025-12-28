@@ -55,7 +55,7 @@ const CarFilterControls = ({
       {/* Price Range */}
       <div className="space-y-4 px-2">
         <h3 className="font-medium">Price Range</h3>
-        <div className="px-2">
+        <div className="rounded-xl bg-gray-50 p-3 border border-black/5">
           <Slider
             min={filters.priceRange.min}
             max={filters.priceRange.max}
@@ -98,11 +98,11 @@ const CarFilterControls = ({
                 variant={
                   section.currentValue === option.value ? "default" : "outline"
                 }
-                className={`cursor-pointer px-3 py-1 transition-colors duration-150
-                  ${
+                className={`cursor-pointer px-3 py-1.5 rounded-full text-xs transition-all duration-200
+                ${
                   section.currentValue === option.value
-                    ? "bg-blue-100 hover:bg-blue-200 text-blue-900 border-blue-200"
-                    : "bg-white hover:bg-gray-100 text-gray-700"
+                    ? "bg-red-100 text-red-900 border border-red-200 shadow-sm"
+                    : "bg-white hover:bg-gray-100 text-gray-700 border border-black/10"
                 }`}
                 onClick={() => {
                   section.onChange(
