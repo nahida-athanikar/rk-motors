@@ -257,20 +257,23 @@ http://localhost:3000
 ```
 
 
-## 🌍 Live Demo & Repository
+## 🌐 Live Demo & Repository
 
-- 🔗 **Live Project:**  https://rk-motors-blond.vercel.app/
-- 📦 **GitHub Repository:** [https://github.com/nahida-athanikar/rk-motors] 
+- 🔗 **Live Application:**  
+  https://rk-motors-blond.vercel.app/
+
+- 📂 **GitHub Repository:**  
+  https://github.com/nahida-athanikar/rk-motors  
 
 ---
 
 ## 🤝 Connect With Me
 
-If you like this project or have suggestions, feel free to connect.  
- 
+If you found this project interesting or have any feedback, feel free to connect or reach out.
 
-<p align="center">⭐ If you find this project helpful, don’t forget to star the repository!</p>
+⭐ If this project helped you, consider giving it a star on GitHub — it truly motivates!
 
+---
 
 
 
