@@ -27,30 +27,6 @@ This project was inspired by a **real-world problem** where users repeatedly str
 The platform focuses on **performance, scalability, and real-world usability**, making it suitable for modern automobile services.
 
 
-## 🚀 Key Features
-
-### 🔍 Smart Car Discovery
-- Filter cars by **fuel type**, **body type**, **model**, and more  
-- Quick and accurate search results  
-
-### 📅 Test Drive Scheduling
-- Users can book test drives by selecting **date and time**
-- Reduces manual coordination with dealers  
-
-### 🔐 Authentication & Security
-- Secure authentication using **Clerk**
-- API protection and rate limiting using **Arcjet**
-
-### ⚙️ Backend & Data Management
-- REST APIs built using **Next.js + Express.js**
-- **Prisma ORM** for type-safe database access
-- **Supabase** as a scalable cloud database
-
-### 🤖 AI Integration
-- **Gemini API** used for intelligent API-based features and enhancements
-
----
-
 ## 🛠️ Tech Stack
 
 ### Frontend
@@ -171,6 +147,71 @@ The platform focuses on **performance, scalability, and real-world usability**, 
   </tr>
   
 </table>
+---
+
+## 📌 Features
+
+### 🚗 Car Listings & Management
+- Browse and view detailed car listings with images and specs  
+- Admin can create, update, and delete listings  
+- Built using **Next.js, MongoDB, Prisma ORM**  
+
+### 🤖 AI-Based Car Detection
+- Detect car brand and model from uploaded images  
+- Built using **Gemini Vision API + Next.js Server Actions**  
+
+### 🔍 Smart Search & Filtering
+- Search cars with partial matching and dynamic filters  
+- Built using **MongoDB queries + Next.js**  
+
+### 🧠 Image-to-Search Pipeline
+- Converts images into real-time search queries  
+- Built using **Gemini API, Next.js, MongoDB**  
+
+### 🖼 Image Upload System
+- Secure image uploads with manual and AI-based options  
+- Built using **Cloudinary + Next.js**  
+
+### 🔐 Authentication & Authorization
+- Login/signup with Email/Password and Google OAuth  
+- Protected routes and session management using **Clerk**  
+
+### 🛡️ Security & Protection
+- Rate limiting and bot protection  
+- Implemented using **Arcjet**  
+
+### 💬 Real-Time Chat
+- WhatsApp-like messaging between users  
+- Built using **WebSockets**  
+
+### 📞 Calling Feature
+- Direct user-to-user calling  
+- Built using **WebRTC**  
+
+### 📧 Email Notifications
+- Sends alerts and inquiry emails  
+- Built using **Nodemailer**  
+
+### 🤖 Smart Assistant
+- Handles user queries with intelligent responses  
+- Built using **Gemini API**  
+
+### 🛠️ Admin Panel
+- Manage cars, AI uploads, and test drive requests  
+- Built using **Next.js, MongoDB, Prisma**  
+
+### 📱 Responsive Design
+- Fully responsive UI across all devices  
+- Built using **React + Tailwind CSS**  
+
+### ⚡ Performance Optimization
+- Optimized backend using Server Actions and Prisma  
+- Improves speed and scalability  
+
+### ⚠️ Error Handling & Reliability
+- Handles API and AI failures gracefully  
+- Ensures stable user experience  
+
 ---
 
 ## 🌍 Live Demo & Repository
