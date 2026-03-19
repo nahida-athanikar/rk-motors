@@ -29,9 +29,9 @@ The platform focuses on **performance, scalability, and real-world usability**, 
 
 ## 🛠 Tech Stack
 
-| Layer | Technology Used |
+| Category | Tools / Libraries |
 |------|----------------|
-| **Frontend** | Next.js (React), Tailwind CSS |
+| **Frontend** | Next.js (React), Tailwind CSS, shadCN |
 | **Backend** | Next.js Server Actions, Node.js |
 | **Database** | MongoDB, Prisma ORM |
 | **Authentication** | Clerk (Google OAuth, Email/Password) |
@@ -45,33 +45,6 @@ The platform focuses on **performance, scalability, and real-world usability**, 
 
 ---
 
-
-## 📈 Impact on Users
-
-- ⏱️ Reduces time spent on searching and booking test drives  
-- 🎯 Improves decision-making with smart filters  
-- 📱 Smooth, responsive, and user-friendly interface  
-- 🔒 Secure access with modern authentication and security practices  
-
----
-
-## 🎯 What I Learned
-
-- Building a **production-style full-stack application**
-- Integrating modern authentication and security tools
-- Working with **Prisma ORM & Supabase**
-- Designing scalable backend architecture
-
----
-
-## 🔮 Future Scope
-
-- AI-based car recommendations  
-- Cloud deployment and scaling  
-- Mobile app version  
-- Integration with real dealership systems  
-
----
 
 ## 📸 Snapshots
 
@@ -191,6 +164,91 @@ Fully responsive UI built with React and Tailwind CSS.
 Graceful handling of API and AI failures for reliability.
 
 ---
+
+## Project Structure
+
+📁 rk-motors/
+│
+├── 📁 app/                # Pages & routes (Next.js App Router)
+├── 📁 components/         # Reusable UI components
+├── 📁 actions/            # Server actions (backend logic)
+├── 📁 lib/                # DB & utility functions
+├── 📁 prisma/             # Database schema (Prisma)
+├── 📁 public/             # Images & static assets
+├── 📁 services/           # API configs (Gemini, Cloudinary, etc.)
+├── 📁 middleware/         # Security (Arcjet)
+│
+├── middleware.js          # Global middleware
+├── next.config.mjs        # Next.js config
+├── package.json           # Dependencies
+├── .env                   # Environment variables
+└── README.md              # Documentation
+
+---
+
+## 📊 User Workflow
+
+1. 👉 User signs up or logs in using Email/Password or Google  
+2. 🔍 User searches for cars or uploads an image for AI detection  
+3. 🤖 System identifies car details using Gemini API  
+4. 🚗 Relevant car listings are fetched from the database  
+5. 📄 User views detailed car information and pricing  
+6. 💬 User interacts via chat, calling, or smart assistant  
+7. 📅 User books or requests a test drive  
+8. 📧 System sends notifications and updates via email  
+9. 🛠️ Admin manages listings, AI uploads, and test drive requests  
+
+---
+
+## 📦 Installation Guide
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/nahida-athanikar/rk-motors.git
+cd rk-motors
+```
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
+
+### 3️⃣ Add Environment Variables
+Create a .env file in the root directory:
+```bash
+# MongoDB
+DATABASE_URL=your_mongodb_connection_string
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+
+# Gemini API
+GEMINI_API_KEY=your_gemini_api_key
+
+# Cloudinary
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
+
+# Email (Nodemailer)
+SMTP_USER=your_email
+SMTP_PASS=your_password
+
+# Arcjet Security
+ARCJET_KEY=your_arcjet_key
+```
+#### 👉 Replace all values with your actual credentials.
+
+### 4️⃣ Run the Application
+```bash
+npm run dev
+```
+
+### 5️⃣ Open in Browser
+Open your browser and visit:
+```bash
+http://localhost:3000
+```
 
 
 ## 🌍 Live Demo & Repository
