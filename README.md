@@ -27,30 +27,24 @@ This project was inspired by a **real-world problem** where users repeatedly str
 The platform focuses on **performance, scalability, and real-world usability**, making it suitable for modern automobile services.
 
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
-### Frontend
-- React.js  
-- Responsive UI with modern design principles 
-
-### Backend
-- Next.js  
-- Node.js  
-- Express.js  
-
-### Database & ORM
-- Supabase  
-- Prisma ORM  
-
-### Authentication & Security
-- Clerk Authentication  
-- Arcjet Security (Rate limiting & security) 
-
-### APIs
-- Gemini API  
-
+| Layer | Technology Used |
+|------|----------------|
+| **Frontend** | Next.js (React), Tailwind CSS |
+| **Backend** | Next.js Server Actions, Node.js |
+| **Database** | MongoDB, Prisma ORM |
+| **Authentication** | Clerk (Google OAuth, Email/Password) |
+| **Image Management** | Cloudinary |
+| **AI Features** | Google Gemini API (Vision + Conversational) |
+| **Real-Time Communication** | WebSockets (Chat), WebRTC (Calling) |
+| **Email Service** | Nodemailer |
+| **Security** | Arcjet (Rate Limiting, Bot Protection) |
+| **Deployment** | Vercel / Render |
+| **Version Control** | Git & GitHub |
 
 ---
+
 
 ## 📈 Impact on Users
 
