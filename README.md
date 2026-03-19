@@ -149,70 +149,55 @@ The platform focuses on **performance, scalability, and real-world usability**, 
 </table>
 ---
 
-## 📌 Features
+## 🚀 Key Features Implemented
 
-### 🚗 Car Listings & Management
-- Browse and view detailed car listings with images and specs  
-- Admin can create, update, and delete listings  
-- Built using **Next.js, MongoDB, Prisma ORM**  
+• 🔐 **User Authentication**  
+Login/signup with Email/Password and Google OAuth using Clerk with protected routes.
 
-### 🤖 AI-Based Car Detection
-- Detect car brand and model from uploaded images  
-- Built using **Gemini Vision API + Next.js Server Actions**  
+• 🚗 **Car Listings Management (CRUD)**  
+Add, edit, delete, and explore car listings with detailed information.
 
-### 🔍 Smart Search & Filtering
-- Search cars with partial matching and dynamic filters  
-- Built using **MongoDB queries + Next.js**  
+• 🖼 **Image Upload System**  
+Secure cloud-based image uploads using Cloudinary with manual and AI options.
 
-### 🧠 Image-to-Search Pipeline
-- Converts images into real-time search queries  
-- Built using **Gemini API, Next.js, MongoDB**  
+• 🤖 **AI Car Detection**  
+Detect car brand and model from images using Gemini Vision API.
 
-### 🖼 Image Upload System
-- Secure image uploads with manual and AI-based options  
-- Built using **Cloudinary + Next.js**  
+• 🧠 **Image-to-Search Pipeline**  
+Convert uploaded images into real-time car search results.
 
-### 🔐 Authentication & Authorization
-- Login/signup with Email/Password and Google OAuth  
-- Protected routes and session management using **Clerk**  
+• 🔍 **Smart Search & Filters**  
+Search cars with partial matching and dynamic filtering.
 
-### 🛡️ Security & Protection
-- Rate limiting and bot protection  
-- Implemented using **Arcjet**  
+• 💬 **Real-Time Chat System**  
+WhatsApp-like messaging between users using WebSockets.
 
-### 💬 Real-Time Chat
-- WhatsApp-like messaging between users  
-- Built using **WebSockets**  
+• 📞 **Calling Feature**  
+Enable direct user-to-user calling using WebRTC.
 
-### 📞 Calling Feature
-- Direct user-to-user calling  
-- Built using **WebRTC**  
+• 📧 **Email Notifications**  
+Send alerts and updates using Nodemailer.
 
-### 📧 Email Notifications
-- Sends alerts and inquiry emails  
-- Built using **Nodemailer**  
+• 🤖 **Smart Assistant**  
+Conversational assistant for user queries using Gemini API.
 
-### 🤖 Smart Assistant
-- Handles user queries with intelligent responses  
-- Built using **Gemini API**  
+• 🛠 **Admin Panel**  
+Manage cars, AI uploads, and test drive requests.
 
-### 🛠️ Admin Panel
-- Manage cars, AI uploads, and test drive requests  
-- Built using **Next.js, MongoDB, Prisma**  
+• 🛡 **Security & Protection**  
+Rate limiting and bot protection using Arcjet.
 
-### 📱 Responsive Design
-- Fully responsive UI across all devices  
-- Built using **React + Tailwind CSS**  
+• ⚡ **Performance Optimization**  
+Fast backend using Next.js Server Actions and Prisma ORM.
 
-### ⚡ Performance Optimization
-- Optimized backend using Server Actions and Prisma  
-- Improves speed and scalability  
+• 📱 **Responsive Design**  
+Fully responsive UI built with React and Tailwind CSS.
 
-### ⚠️ Error Handling & Reliability
-- Handles API and AI failures gracefully  
-- Ensures stable user experience  
+• ⚠️ **Error Handling**  
+Graceful handling of API and AI failures for reliability.
 
 ---
+
 
 ## 🌍 Live Demo & Repository
 
