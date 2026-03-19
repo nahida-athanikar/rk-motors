@@ -103,49 +103,74 @@ The platform focuses on **performance, scalability, and real-world usability**, 
 
 ---
 
-## 📸 Application Snapshots
+## 📸 Snapshots
 
-### 🏠 Home Page
-![Home Page](public/snapshots/HomePage.png)
+<table>
+  <tr>
+    <td align="center"><b>🏠 Home Page</b></td>
+    <td align="center"><b>🔍 Explore Cars with Filters</b></td>
+  </tr>
+  <tr>
+    <td><img src="public/snapshots/HomePage.png" width="100%"/></td>
+    <td><img src="public/snapshots/browse-cars-page.png" width="100%"/></td>
+  </tr>
 
-### 🔍 Browse Cars & Filters
-![Browse Cars](public/snapshots/browse-cars-page.png)
+  <tr><td colspan="2" height="30"></td></tr>
 
-### 🚘 Car Details & EMI Calculator
-![Car Details](public/snapshots/car-details-page.png)
+  <tr>
+    <td align="center"><b>⭐ Highlighted Cars Section</b></td>
+    <td align="center"><b>🚘 Car Details & EMI Info</b></td>
+  </tr>
+  <tr>
+    <td><img src="public/snapshots/featured-cars-section.png" width="100%"/></td>
+    <td><img src="public/snapshots/car-details-page.png" width="100%"/></td>
+  </tr>
 
-### ⭐ Featured Cars
-![Featured Cars](public/snapshots/featured-cars-section.png)
+  <tr><td colspan="2" height="30"></td></tr>
 
-### ❓ Frequently Asked Questions
-![FAQ](public/snapshots/faq-section.png)
+  <tr>
+    <td align="center"><i><b>🤖 Search Cars via Image (AI)</b></i></td>
+    <td align="center"><i><b>❓ FAQ Section</b></i></td>
+  </tr>
+  <tr>  
+    <td><img src="public/snapshots/AI-search-image.png" width="100%"/></td>
+    <td><img src="public/snapshots/faq-section.png" width="100%"/></td>
+  </tr>
 
-### 🤖 Image-Based AI Car Search
-![AI Image Search](public/snapshots/AI-search-image.png)
+  <tr><td colspan="2" height="30"></td></tr>
 
-### 🔐 Authentication (Clerk)
-![Login](public/snapshots/loginPage.png)
+  <tr>
+    <td align="center"><i><b>🔐 Login / Signup Page</b></i></td>
+    <td align="center"><i><b>📊 Admin Dashboard</b></i></td>
+  </tr>
+  <tr>
+    <td><img src="public/snapshots/loginPage.png" width="100%"/></td>
+    <td><img src="public/snapshots/admin-dashboard.png" width="100%"/></td>
+  </tr>
 
----
+  <tr><td colspan="2" height="30"></td></tr>
 
-## 🛠️ Admin Panel
+  <tr>
+    <td align="center"><i><b>➕ Manual Car Entry</b></i></td>
+    <td align="center"><i><b>🤖 AI-Based Car Upload</b></i></td>
+  </tr>
+  <tr>
+    <td><img src="public/snapshots/Manual-entry-section.png" width="100%"/></td>
+    <td><img src="public/snapshots/AI-Upload-section.png" width="100%"/></td>
+  </tr>
 
-### 📊 Admin Dashboard
-![Admin Dashboard](public/snapshots/admin-dashboard.png)
+  <tr><td colspan="2" height="30"></td></tr>
 
-### 🚗 Cars Management
-![Cars Management](public/snapshots/admin-cars-management.png)
-
-### Add car detail 
-![Manually Entry](public/snapshots/Manual-entry-section.png)
-
-![AI Upload Entry](public/snapshots/AI-Upload-section.png)
-
-
-### 📅 Test Drive Management
-![Test Drives](public/snapshots/admin-test-drives-manage.png)
-
-
+  <tr>
+    <td align="center"><i><b>🚗 Manage Car Listings</b></i></td>
+    <td align="center"><i><b>📅 Manage Test Drive Requests</b></i></td>
+  </tr>
+  <tr>
+    <td><img src="public/snapshots/admin-cars-management.png" width="100%"/></td>
+    <td><img src="public/snapshots/admin-test-drives-manage.png" width="100%"/></td>
+  </tr>
+  
+</table>
 ---
 
 ## 🌍 Live Demo & Repository
