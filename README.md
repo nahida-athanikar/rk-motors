@@ -31,8 +31,19 @@ This project delivers a modern car marketplace experience focused on **AI-driven
 It integrates multiple systems including **AI-powered search, Clerk authentication, Arcjet security, Cloudinary storage, and real-time communication**, all combined with a responsive and intuitive UI for a smooth user experience.
 
 
+---
+
+## 🌐 Live Demo & Repository
+
+- 🔗 **Live Application:**  
+  https://rk-motors-blond.vercel.app/
+
+- 📂 **GitHub Repository:**  
+  https://github.com/nahida-athanikar/rk-motors  
 
 ----
+
+
 ## 📸 Snapshots
 
 <table>
@@ -342,14 +353,6 @@ Open your browser and visit:
 http://localhost:3000
 ```
 
-
-## 🌐 Live Demo & Repository
-
-- 🔗 **Live Application:**  
-  https://rk-motors-blond.vercel.app/
-
-- 📂 **GitHub Repository:**  
-  https://github.com/nahida-athanikar/rk-motors  
 
 ---
 
