@@ -26,32 +26,13 @@ Built using **Next.js, MongoDB, Prisma, and Gemini API**, and enhanced with inte
 
 ## 🎯 Project Overview
 
-This project delivers a modern car marketplace experience focused on **AI-driven vehicle identification, smart search, and seamless user interaction**.  
-Users can upload images to detect cars, explore listings, interact via chat and calling, and manage bookings, while admins can control listings and test drives through a dedicated dashboard.
+This project delivers a modern car marketplace experience focused on **AI-driven vehicle identification, smart search, and seamless user interaction**. Users can upload images to detect cars, explore listings, interact via chat and calling, and manage bookings, while admins can control listings and test drives through a dedicated dashboard.
 
 It integrates multiple systems including **AI-powered search, Clerk authentication, Arcjet security, Cloudinary storage, and real-time communication**, all combined with a responsive and intuitive UI for a smooth user experience.
 
----
-
-## 🛠 Tech Stack
-
-| Category | Tools / Libraries |
-|------|----------------|
-| **Frontend** | Next.js (React), Tailwind CSS, shadCN |
-| **Backend** | Next.js Server Actions, Node.js |
-| **Database** | MongoDB, Prisma ORM |
-| **Authentication** | Clerk (Google OAuth, Email/Password) |
-| **Image Management** | Cloudinary |
-| **AI Features** | Google Gemini API (Vision + Conversational) |
-| **Real-Time Communication** | WebSockets (Chat), WebRTC (Calling) |
-| **Email Service** | Nodemailer |
-| **Security** | Arcjet (Rate Limiting, Bot Protection) |
-| **Deployment** | Vercel / Render |
-| **Version Control** | Git & GitHub |
-
----
 
 
+----
 ## 📸 Snapshots
 
 <table>
@@ -120,54 +101,159 @@ It integrates multiple systems including **AI-powered search, Clerk authenticati
   </tr>
   
 </table>
+
+
+---
+
+## 🛠 Tech Stack
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,nodejs,mongodb,git,github,vercel" />
+</p>
+
+<p align="center">
+  Clerk • Cloudinary • Prisma • Gemini API • WebSockets • WebRTC • Nodemailer • Arcjet
+</p>
+<table align="center">
+  <tr>
+    <th>Category</th>
+    <th>Tools / Libraries</th>
+  </tr>
+
+  <tr>
+    <td><b>Frontend</b></td>
+    <td>
+      <!-- <img src="https://skillicons.dev/icons?i=nextjs,tailwind,react" height="25"/> -->
+      Next.js, Tailwind CSS, shadCN
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Backend</b></td>
+    <td>
+      <!-- <img src="https://skillicons.dev/icons?i=nodejs,nextjs" height="25"/> -->
+      Next.js Server Actions, Node.js
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Database</b></td>
+    <td>
+      <!-- <img src="https://skillicons.dev/icons?i=mongodb" height="25"/> -->
+      MongoDB, Prisma ORM
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Authentication</b></td>
+    <td>Clerk (Google OAuth, Email/Password)</td>
+  </tr>
+
+  <tr>
+    <td><b>Image Management</b></td>
+    <td>Cloudinary</td>
+  </tr>
+
+  <tr>
+    <td><b>AI Features</b></td>
+    <td>Google Gemini API</td>
+  </tr>
+
+  <tr>
+    <td><b>Real-Time Communication</b></td>
+    <td>WebSockets, WebRTC</td>
+  </tr>
+
+  <tr>
+    <td><b>Email Service</b></td>
+    <td>Nodemailer</td>
+  </tr>
+
+  <tr>
+    <td><b>Security</b></td>
+    <td>Arcjet</td>
+  </tr>
+
+  <tr>
+    <td><b>Deployment</b></td>
+    <td>
+      <!-- <img src="https://skillicons.dev/icons?i=vercel" height="25"/> -->
+      Vercel / Render
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Version Control</b></td>
+    <td>
+      <!-- <img src="https://skillicons.dev/icons?i=git,github" height="25"/> -->
+      Git & GitHub
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## 🚀 Key Features Implemented
 
-• 🔐 **User Authentication**  
-Login/signup with Email/Password and Google OAuth using Clerk with protected routes.
+### 🔐 Authentication & Security
+- **User Authentication**
+  - Email/Password and Google OAuth via Clerk
+  - Protected routes and session management
+- **Security & Protection**
+  - Rate limiting and bot protection using Arcjet
 
-• 🚗 **Car Listings Management (CRUD)**  
-Add, edit, delete, and explore car listings with detailed information.
 
-• 🖼 **Image Upload System**  
-Secure cloud-based image uploads using Cloudinary with manual and AI options.
+### 🚗 Car Listings System
+- **Full CRUD Functionality**
+  - Add, edit, and delete car listings
+  - View detailed car information
+- **Smart Search & Filters**
+  - Partial matching search
+  - Dynamic filtering based on user preferences
 
-• 🤖 **AI Car Detection**  
-Detect car brand and model from images using Gemini Vision API.
 
-• 🧠 **Image-to-Search Pipeline**  
-Convert uploaded images into real-time car search results.
+### 🖼 Image & AI Integration
+- **Image Upload System**
+  - Secure uploads using Cloudinary
+  - Supports both manual and AI-based uploads
+- **AI Car Detection**
+  - Detect car brand and model using Gemini Vision API
+- **Image-to-Search Pipeline**
+  - Convert uploaded images into real-time searchable listings
 
-• 🔍 **Smart Search & Filters**  
-Search cars with partial matching and dynamic filtering.
 
-• 💬 **Real-Time Chat System**  
-WhatsApp-like messaging between users using WebSockets.
+### 💬 Real-Time Communication
+- **Chat System**
+  - WhatsApp-like real-time messaging using WebSockets
+- **Calling Feature**
+  - Peer-to-peer calling using WebRTC
 
-• 📞 **Calling Feature**  
-Enable direct user-to-user calling using WebRTC.
 
-• 📧 **Email Notifications**  
-Send alerts and updates using Nodemailer.
+### 🤖 AI Features
+- **Smart Assistant**
+  - Conversational assistant powered by Gemini API
+  - Handles user queries intelligently
 
-• 🤖 **Smart Assistant**  
-Conversational assistant for user queries using Gemini API.
 
-• 🛠 **Admin Panel**  
-Manage cars, AI uploads, and test drive requests.
+### 📧 Notifications & Admin
+- **Email Notifications**
+  - Automated alerts using Nodemailer
+- **Admin Panel**
+  - Manage listings, AI uploads, and test drive requests
 
-• 🛡 **Security & Protection**  
-Rate limiting and bot protection using Arcjet.
 
-• ⚡ **Performance Optimization**  
-Fast backend using Next.js Server Actions and Prisma ORM.
+### ⚡ Performance & UI
+- **Performance Optimization**
+  - Fast backend with Next.js Server Actions
+  - Efficient database handling using Prisma ORM
+- **Responsive Design**
+  - Fully responsive UI with React and Tailwind CSS
 
-• 📱 **Responsive Design**  
-Fully responsive UI built with React and Tailwind CSS.
 
-• ⚠️ **Error Handling**  
-Graceful handling of API and AI failures for reliability.
+### ⚠️ Reliability
+- **Error Handling**
+  - Graceful handling of API and AI failures
+  - Ensures system stability and better user experience
+ 
 
 ---
 
